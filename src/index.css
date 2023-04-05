@@ -3,5 +3,8 @@
 @tailwind utilities;
 
 .bgImage{
-  background-image: url('assests/carbg.jpg');
+  background-image: url('assests/car.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
