@@ -19,7 +19,7 @@ const Home = () => {
 					</div>
 					<div className='flex flex-col items-center justify-center mt-2 text-2xl font-thin'>
 						<p>
-							Well strutured and organized system of making your vehicle
+							Well strutured and organized system for making your vehicle
 							registration
 						</p>
 						<p>No hidding charges all for free</p>
