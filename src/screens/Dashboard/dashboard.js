@@ -10,15 +10,15 @@ const Dashboard = () => {
 	const success = 'Success';
 
 	return (
-		<>
+		<div className=''>
 			<Header />
 			<hr className='border-2' />
-			<div className='flex flex-row items-center justify-center'>
-				<div className='flex flex-col items-center justify-start h-screen w-3/12 bg-slate-100'>
+			<div className='flex items-center justify-start'>
+				<div className='flex flex-col items-center justify-start top-0 left-0 h-[1500px] w-3/12 bg-slate-100'>
 					<img
 						src={account}
 						alt={account}
-						className='h-36 w-36 mt-4'
+						className='h-36 w-36'
 					/>
 					<p className='text-2xl mt-2 text-gray-500'>Ushie</p>
 					<div className='flex flex-col items-center text-gray-500 justify-start p-3 space-y-3 mt-24'>
@@ -74,8 +74,8 @@ const Dashboard = () => {
 						</Link>
 					</div>
 				</div>
-				<div className='w-9/12'>
-					<div className='flex flex-col items-center justify-start -mt-32'>
+				<div className='flex-grow bg-white h-[1400px]'>
+					<div className='flex flex-col items-center justify-start p-4'>
 						<p className='text-black text-2xl'>
 							Tracking your registration progress
 						</p>
@@ -88,11 +88,11 @@ const Dashboard = () => {
 								/>
 							</div>
 							<hr
-								className={`h-1 w-28 ${ship ? 'bg-cyan-400' : 'bg-gray-400'}`}
+								className={`h-1 w-28 ${!ship ? 'bg-cyan-400' : 'bg-gray-400'}`}
 							/>
 							<div
 								className={`flex h-16 w-16 text-3xl ${
-									ship ? 'bg-cyan-400' : 'bg-gray-400'
+									!ship ? 'bg-cyan-400' : 'bg-gray-400'
 								} shadow-2xl rounded-full`}>
 								<img
 									src={check}
@@ -101,11 +101,11 @@ const Dashboard = () => {
 								/>
 							</div>{' '}
 							<hr
-								className={`h-1 w-28 ${arrive ? 'bg-cyan-400' : 'bg-gray-400'}`}
+								className={`h-1 w-28 ${!arrive ? 'bg-cyan-400' : 'bg-gray-400'}`}
 							/>
 							<div
 								className={`flex h-16 w-16 text-3xl ${
-									arrive ? 'bg-cyan-400' : 'bg-gray-400'
+									!arrive ? 'bg-cyan-400' : 'bg-gray-400'
 								} shadow-2xl rounded-full`}>
 								<img
 									src={check}
@@ -139,13 +139,13 @@ const Dashboard = () => {
 							</p>
 							<p>Success</p>
 						</div>
-					</div>
-					<div className='p-7 mt-5 w-full'>
-						<Outlet />
+						<div className='p-7 mt-5 w-full'>
+							<Outlet />
+						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import car from './../assests/carowner.png';
+import car from './../assests/car1.jpg';
 
 
 const Signin = () => {
@@ -8,10 +8,12 @@ const Signin = () => {
     <div>
       {/* Global Container */}
       <div className="flex flex-row bg-gray-200">
-        <div className="relative h-full md:w-1/2 bg-gray-100 p-4">
-        <p className='bg-clip-text text-5xl font-extrabold text-transparent bg-gradient-to-r from-pink-600 to-violet-600'>
-            RoadLink
-        </p>
+        <div className="relative md:w-1/2 bg-gray-100 p-4">
+							<Link to='/'>
+								<p className='bg-clip-text text-5xl font-extrabold text-transparent bg-gradient-to-r from-pink-500 to-violet-500'>
+									RoadLink
+								</p>
+							</Link>
           <div className="md:p-20 mt-38 md:mt-8 ">
             <div className="mt-32 md:mt-0">
               <h2 className="text-3xl mb-5 font-bold font-sans text-violet-900">
@@ -63,14 +65,9 @@ const Signin = () => {
                   </label>
                 </div>
                 <div className="flex items-center mb-4">
-                  <Link
-                    to="/sign-up"
-                    className="ml-2 text-md font-medium text-gray-900 dark:text-gray-600 decoration-clone underline"
-                  >
-                    Forget Password
-                  </Link>
                 </div>
               </div>
+              <p className='text-black -mt-3 mb-4'>Already have an account?<Link to="/Signin"><span className='text-violet-500 font-bold'> Sign In</span></Link> </p>
               <button
                 className="flex items-center justify-center mb-8 py-2 space-x-3 w-full rounded-xl hover:bg-violet-400  
                 hover:shadow-lg hover:-translate-y-0.5 transition duration-150 bg-violet-500"

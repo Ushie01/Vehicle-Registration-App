@@ -8,9 +8,9 @@ const DriverLensVerification = () => {
                 <p>Verify Your Driver License</p>
                 <input
                     type='text'
-                    className='p-6 h-12 w-full'
+                    className='p-6 h-12 w-full rounded-lg'
                 />
-                <button className="p-3 bg-violet-500 text-white w-36">
+                <button className="p-3 bg-violet-500 rounded-lg text-white w-36">
                     Submit
                 </button>
             </form>

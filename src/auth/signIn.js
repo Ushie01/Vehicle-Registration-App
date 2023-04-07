@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import car from "./../assests/carowner.png";
+import car from "./../assests/car1.jpg";
 
 const Signin = () => {
   return (
     <div>
       {/* Global Container */}
       <div className="flex flex-row bg-gray-200">
-        <div className="relative h-full md:w-1/2  p-4">
+        <div className="relative md:w-1/2 p-4">
         <p className='bg-clip-text text-5xl font-extrabold text-transparent bg-gradient-to-r from-pink-600 to-violet-600'>
             RoadLink
         </p>
@@ -54,6 +54,7 @@ const Signin = () => {
                   </Link>
                 </div>
               </div>
+              <p className='text-black -mt-3 mb-4'>Don't have an account?<Link to="/Signup"><span className='text-violet-500 font-bold'> Sign Up</span></Link> </p>
               <button
                 className="flex items-center justify-center mb-8 py-2 space-x-3 w-full rounded-xl hover:bg-violet-400  
                 hover:shadow-lg hover:-translate-y-0.5 transition duration-150 bg-violet-500"
@@ -66,7 +67,7 @@ const Signin = () => {
         <img
           src={car}
           alt={car}
-          className="hidden md:block m-auto h-full w-1/2 shadow-lg"
+          className="hidden md:block m-auto w-1/2 h-full shadow-lg"
         />
       </div>
     </div>

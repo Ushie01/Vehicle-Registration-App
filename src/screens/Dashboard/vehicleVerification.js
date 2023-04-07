@@ -6,13 +6,13 @@ const VehicleVerification = () => {
 				</p>
 				<form
 					action=''
-					className='flex flex-col items-center justify-center space-y-3 text-white p-6 border-2 w-6/12  mt-8 bg-pink-500'>
+					className='flex flex-col items-center justify-center space-y-3 text-white p-6 border-2 w-6/12 mt-8 bg-pink-500'>
 					<p>Verify Your Vehicle Registration</p>
 					<input
 						type='text'
-						className='p-6 h-12 w-full'
+						className='p-6 h-12 w-full rounded-lg'
 					/>
-					<button className='p-3 bg-violet-500 text-white w-36'>Submit</button>
+					<button className='p-3 rounded-lg bg-violet-500 text-white w-36'>Submit</button>
 				</form>
 			</>
 		);
