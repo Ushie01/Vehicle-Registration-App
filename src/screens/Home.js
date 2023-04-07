@@ -15,7 +15,7 @@ const Home = () => {
 				<div className='flex flex-col items-center justify-center text-white'>
 					<div className='flex flex-col items-center justify-start text-4xl font-extrabold mt-12 p-8'>
 						<p>Get your vehicle registration from the comfort of your home</p>
-						<p>Say good buy to stress and long queue</p>
+						<p>Say good bye to stress and long queue</p>
 					</div>
 					<div className='flex flex-col items-center justify-center mt-2 text-2xl font-thin'>
 						<p>
