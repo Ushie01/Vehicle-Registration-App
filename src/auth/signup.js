@@ -1,9 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { validateSignUp } from '../validate';
+import { signUp } from '../helper/api';
 import car from './../assests/car1.jpg';
 
 
 const Signin = () => {
+  const user = JSON.parse(localStorage.getItem('user')) || [];
+  const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+	const [error, setError] = useState('');
+  const [err, setErr] = useState([]);
+  console.log(user);
+  
+	const handleLogin = async (event) => {
+		event.preventDefault();
+		const payload = {
+      firstName, 
+      lastName, 
+      phoneNo, 
+      email, 
+      password,
+      confirmPassword
+    };
+		setError(validateSignUp(payload));
+		// setSubmitted(true);
+		const response = await signUp(payload);
+		const finalResponse = await response.json();
+		if (finalResponse.message.includes("successfully")) {
+			localStorage.setItem('user', JSON.stringify(finalResponse?.data));      
+      setErr(finalResponse.message);
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPhoneNo('');
+      setPassword('');
+      setConfirmPassword('');
+      setTimeout(() => {
+        navigate('/');
+			}, 3000);
+      
+		} else {
+			// setSubmitted(false);
+			setErr(finalResponse.message);
+			setTimeout(() => {
+				setErr('');
+			}, 7000);
+		}
+  };
+
   return (
     <div>
       {/* Global Container */}
@@ -23,32 +73,79 @@ const Signin = () => {
                 type="text"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
+              {error.firstName && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.firstName}
+                </p>
+              )}
               <input
                 type="text"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Last Name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
+              {error.lastName && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.lastName}
+                </p>
+              )}
               <input
                 type="email"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+              {error.email && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.email}
+                </p>
+              )}
               <input
                 type="number"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Phone Number"
+                value={phoneNo}
+                onChange={(e) => setPhoneNo(e.target.value)}
               />
+              {error.phoneNo && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.phoneNo}
+                </p>
+              )}
               <input
                 type="password"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                />
+              {error.password && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.password}
+                </p>
+              )}
               <input
                 type="password"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
+              {error.confirmPassword && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.confirmPassword}
+                </p>
+              )}
+              {err && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {err}
+                </p>
+              )}
               <div className="flex items-center justify-between my-6">
                 <div className="flex items-center mb-4">
                   <input
@@ -69,6 +166,7 @@ const Signin = () => {
               </div>
               <p className='text-black -mt-3 mb-4'>Already have an account?<Link to="/Signin"><span className='text-violet-500 font-bold'> Sign In</span></Link> </p>
               <button
+                onClick={handleLogin}
                 className="flex items-center justify-center mb-8 py-2 space-x-3 w-full rounded-xl hover:bg-violet-400  
                 hover:shadow-lg hover:-translate-y-0.5 transition duration-150 bg-violet-500"
               >

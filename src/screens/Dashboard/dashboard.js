@@ -129,7 +129,7 @@ const Dashboard = () => {
 								/>
 							</div>
 						</div>
-						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-xl space-x-20 m-5'>
+						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-20 m-5'>
 							<p>Signed Up</p>
 							<p>
 								Vehicle <br /> Registration

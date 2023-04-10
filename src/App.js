@@ -4,6 +4,9 @@ import Home from "./screens/Home";
 import Signin from './auth/signIn'
 import Signup from './auth/signup';
 import Dashboard from "./screens/Dashboard/dashboard";
+import AdminDashboard from "./screens/Dashboard/adminDashbord";
+import VehicleRegList from "./screens/Dashboard/vehicleRegList";
+import DriverLensRegList from "./screens/Dashboard/driverLicRegList";
 import VehicleRegistration from "./screens/Dashboard/vehicleReg";
 import VehicleVerification from "./screens/Dashboard/vehicleVerification";
 import DriverLensRegistration from "./screens/Dashboard/driverLenReg";
@@ -52,6 +55,23 @@ const App = () => {
 					<Route
 					    path="driverLensVerification"
 						element={<DriverLensVerification/>}					
+					/>
+				</Route>
+				<Route 
+					path="/admin/Dashboard"
+					element={<AdminDashboard/>}
+			    >
+					<Route
+						index='vehicleRegList'
+						element={<VehicleRegList/>}
+					/>
+					<Route
+						path='vehicleRegList'
+						element={<VehicleRegList/>}
+					/>
+					<Route
+						path='driverLensRegList'
+						element={<DriverLensRegList/>}
 					/>
 				</Route>
 			</Routes>

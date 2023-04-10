@@ -1,8 +1,37 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../helper/api';
+import { validateLogin } from '../validate';
 import car from "./../assests/car1.jpg";
 
 const Signin = () => {
+  const navigate = useNavigate();
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+	const [err, setErr] = useState([]);
+	// const [submitted, setSubmitted] = useState(false);
+
+	const handleLogin = async (event) => {
+		event.preventDefault();
+		const payload = { email, password };
+		setError(validateLogin(payload));
+		// setSubmitted(true);
+		const response = await login(payload);
+		const finalResponse = await response.json();
+    console.log(finalResponse.message);
+		if (finalResponse.message.includes("Successfully")) {
+			localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));
+		    navigate('/');
+		} else {
+			// setSubmitted(false);
+			setErr(finalResponse?.message);
+			setTimeout(() => {
+				setErr('');
+			}, 7000);
+		}
+  };
+  
   return (
     <div>
       {/* Global Container */}
@@ -24,12 +53,32 @@ const Signin = () => {
                 type="text"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
+              {error.email && (
+                <p className='text-red-600 text-sm font-bold ml-8 mb-3'>
+                  {error.email}
+                </p>
+              )}
               <input
                 type="text"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
+              {error.password && (
+                <p className='text-red-600 text-sm font-bold ml-8'>
+                  {error.password}
+                </p>
+              )}
+
+              {err && (
+                <p className='text-red-600 text-sm font-bold ml-8 mt-3'>
+                  {err}
+                </p>
+              )}
               <div className="flex items-center justify-between my-6">
                 <div className="flex items-center mb-4">
                   <input
@@ -56,6 +105,7 @@ const Signin = () => {
               </div>
               <p className='text-black -mt-3 mb-4'>Don't have an account?<Link to="/Signup"><span className='text-violet-500 font-bold'> Sign Up</span></Link> </p>
               <button
+                onClick={handleLogin}
                 className="flex items-center justify-center mb-8 py-2 space-x-3 w-full rounded-xl hover:bg-violet-400  
                 hover:shadow-lg hover:-translate-y-0.5 transition duration-150 bg-violet-500"
               >
