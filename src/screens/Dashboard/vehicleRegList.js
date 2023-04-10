@@ -1,26 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // import add from "./../../assests/plus-lg.svg";
-import { getAllVehicleReg } from "../../helper/api";
+import {
+    getAllVehicleReg, 
+    acceptVehicleDocument
+} from "../../helper/api";
 
 const VehicleRegList = () => {
-
     const [agent, setAgent] = useState([]);
-    
+    const [status, setStatus] = useState('');
+
     const getAgents = async () => {
 		const response = await getAllVehicleReg();
 		const data = await response.json();
         setAgent(data?.finalResult);
     };
     
-    
     useEffect(() => {
         getAgents();
     }, []);
 
-	const handleFileUpload = (event) => {
-
-	};
+    const handleAcceptDoc = async (payload) => {
+        console.log(payload);
+        const res = await acceptVehicleDocument(payload);
+        const finalRes = await res.json();
+        console.log(finalRes);
+        window.location.reload('/admin/Dashboard/vehicleRegList');
+    };
 
 
     return (
@@ -45,7 +51,7 @@ const VehicleRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">nin</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">driverLicense</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">vehicleRegNo</th>
-                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">status</th>
+                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Document Approve</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">createdAt</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">updatedAt</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Accept Document</th>
@@ -97,12 +103,16 @@ const VehicleRegList = () => {
                                     <td className="p-5">{doc.createdAt}</td>
                                     <td className="p-5">{doc.updatedAt}</td>
                                     <td className="p-5">
-                                        <button className="bg-green-600 rounded-md shadow-md font-bold text-white p-3">
+                                        <button 
+                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'TRUE'})}
+                                            className="bg-green-600 rounded-md shadow-md font-bold text-white p-3">
                                             Accept
                                         </button>
                                     </td>
                                     <td className="p-5">
-                                       <button className="bg-red-600 rounded-md shadow-md font-bold text-white p-3">
+                                        <button 
+                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'FALSE'})}
+                                            className="bg-red-600 rounded-md shadow-md font-bold text-white p-3">
                                             Reject
                                         </button>
                                     </td>

@@ -56,10 +56,24 @@ export const getAllLicenseReg = async (payload) => {
     }
 }
 
-export const acceptDocument = async (payload) => {
+export const acceptVehicleDocument = async (payload) => {
     try {
         return await (await fetch(`${baseUrl}/admin/userVehicleApproval`, {
-            method: 'GET',
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const acceptLicenseDocument = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/admin/userVehicleApproval`, {
+            method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
