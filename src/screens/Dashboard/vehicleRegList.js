@@ -8,7 +8,6 @@ import {
 
 const VehicleRegList = () => {
     const [agent, setAgent] = useState([]);
-    const [status, setStatus] = useState('');
 
     const getAgents = async () => {
 		const response = await getAllVehicleReg();
@@ -31,7 +30,7 @@ const VehicleRegList = () => {
 
     return (
         <>
-            <p className='text-4xl font-bold'><span className="text-gray-400">|</span> Vehicle Registration</p>
+            <p className='text-4xl font-bold'><span className="text-gray-400">|</span> Vehicle Registration List</p>
 			<div
 				action=''
 				className='p-6 border-2 mt-8'>

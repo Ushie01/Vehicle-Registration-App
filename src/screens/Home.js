@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import frsc from '../assests/frscimg.gif';
@@ -8,6 +9,8 @@ import chioma from '../assests/chioma.jpg';
 import ote from '../assests/ote.png';
 
 const Home = () => {
+    const user = JSON.parse(localStorage.getItem('user')) || [];
+	
 	return (
 		<>
 			<Header />
@@ -24,9 +27,23 @@ const Home = () => {
 						</p>
 						<p>No hidding charges all for free</p>
 					</div>
-					<button className='bg-violet-500 w-96 mt-28 p-3 rounded-md shadow-2xl'>
-						Get Started
-					</button>
+					{
+						user.role 
+						?
+						<Link to="/Dashboard">
+							<button className='bg-violet-500 w-96 mt-28 p-3 rounded-md shadow-2xl'>
+						        Get Started
+					        </button>
+						</Link>
+							:
+						<Link to="/Signin">
+							<button className='bg-violet-500 w-96 mt-28 p-3 rounded-md shadow-2xl'>
+						        Get Started
+					        </button>
+						</Link>
+							
+					}
+
 				</div>
 			</div>
 			<div className='flex flex-col items-center justify-center p-12'>
@@ -41,9 +58,22 @@ const Home = () => {
 						<div className='flex flex-col items-center justify-start bg-violet-100 h-2/3 rounded-b-2xl'>
 							<h1 className='text-4xl font-bold mt-8'>FRSC</h1>
 							<p className='mt-5'>Register In a Minute</p>
-							<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
-								Enroll
-							</button>
+							{
+								user.role 
+								?
+								<Link to="/Dashboard">
+									<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
+										Enroll
+									</button>
+								</Link>
+								:
+								<Link to="/Signin">
+									<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
+										Enroll
+									</button>
+								</Link>
+									
+							}
 						</div>
 					</div>
 					<div className='flex flex-col h-96 w-60 rounded-2xl border-2 '>
@@ -55,9 +85,22 @@ const Home = () => {
 						<div className='flex flex-col items-center justify-start bg-violet-100 h-2/3 rounded-b-2xl'>
 							<h1 className='text-4xl font-bold mt-8'>VIO</h1>
 							<p className='mt-5'>Register In a Minute</p>
-							<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
-								Enroll
-							</button>
+							{
+								user.role 
+								?
+								<Link to="/Dashboard">
+									<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
+										Enroll
+									</button>
+								</Link>
+								:
+								<Link to="/Signin">
+									<button className='bg-violet-500 w-28 rounded-md text-white mt-16 p-2'>
+										Enroll
+									</button>
+								</Link>
+									
+							}
 						</div>
 					</div>
 				</div>

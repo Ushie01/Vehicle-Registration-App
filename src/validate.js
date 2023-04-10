@@ -55,3 +55,60 @@ export const validateSignUp = (values) => {
 
     return errors;
 }
+
+export const validateVehicleReg = (values) => {
+    let errors = {};
+
+    // if (!values.fileName) {
+    //     errors.fileName = "File Name Required"
+    // }
+
+    if (!values.vehicleCategory) {
+        errors.vehicleCategory = "Vehicle Category is Required"
+    }
+
+    if (!values.vehicleMake) {
+        errors.vehicleMake = "Vehicle Make is Required"
+    }
+
+    if (!values.color) {
+        errors.color = "Color is Required"
+    }
+
+    if (!values.model) {
+        errors.model = "Model is Required"
+    }
+
+    if (!values.engineNumber) {
+        errors.engineNumber = "Engine Number is Required"
+    }
+
+    if (!values.vehicleType) {
+        errors.vehicleType = "Vehicle Type is Required"
+    }
+
+    if (!values.engineCapacity) {
+        errors.engineCapacity = "Engine Capacity is Required"
+    }
+
+    if (!values.phoneNo) {
+        errors.phoneNo = "Phone Number is Required"
+    }
+
+    if (!values.tankCapacity) {
+        errors.tankCapacity = "Tank Capacity is Required"
+    }
+
+    if (!values.nationalId) {
+        errors.nationalId = "NationalId is Required"
+    }
+
+    if (!values.nin) {
+        errors.nin = "NIN is Required"
+    }
+
+    if (!values.driverLicense) {
+        errors.driverLicense = "Driver License Required"
+    }
+    return errors;
+}

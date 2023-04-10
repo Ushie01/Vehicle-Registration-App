@@ -1,6 +1,15 @@
+import { useState } from 'react';
 import add from './../../assests/plus-lg.svg';
 
 const DriverLensRegistration = () => {
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [email, setEmail] = useState('');
+	const [homeAddress, setHomeAddress] = useState('');
+	const [city, setCity] = useState('');
+	const [phoneNo, setPhoneNo] = useState('');
+	const [state, setState] = useState('');
+	// const [vehicleMake, setVehicl]
 	const handleFileUpload = (event) => {
 		// const file = event.target.files[0];
 		// const fileNameParts = file.name.split('.');
@@ -31,8 +40,8 @@ const DriverLensRegistration = () => {
 							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='First Name'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={firstName}
+							onChange={(e) => setFirstName(e.target.value)}
 						/>
 					</div>
 					<div className='space-y-3 w-1/2 pl-8'>
@@ -41,8 +50,8 @@ const DriverLensRegistration = () => {
 							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='Last Number'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
 						/>
 					</div>
 				</div>
@@ -53,8 +62,8 @@ const DriverLensRegistration = () => {
 							type='email'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='Color'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
 					</div>
 					<div className='space-y-3 w-1/2 pl-8'>
@@ -63,8 +72,8 @@ const DriverLensRegistration = () => {
 							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='Home Address'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={homeAddress}
+							onChange={(e) => setHomeAddress(e.target.value)}
 						/>
 					</div>
 				</div>
@@ -75,18 +84,8 @@ const DriverLensRegistration = () => {
 							type='email'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='City'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
-						/>
-					</div>
-					<div className='space-y-3 w-1/2 pl-8'>
-						<p>Mobile Number</p>
-						<input
-							type='text'
-							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='Mobile Number'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
 						/>
 					</div>
 				</div>
@@ -97,8 +96,8 @@ const DriverLensRegistration = () => {
 							type='number'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='Mobile Number'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={phoneNo}
+							onChange={(e) => setPhoneNo(e.target.value)}
 						/>
 					</div>
 					<div className='space-y-3 w-1/2 pl-8'>
@@ -107,22 +106,12 @@ const DriverLensRegistration = () => {
 							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='State'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
+							value={state}
+							onChange={(e) => setState(e.target.value)}
 						/>
 					</div>
 				</div>
 				<div className='flex flex-row items-center justify-between mt-6 font-bold'>
-					<div className='space-y-3 w-1/2 pr-8'>
-						<p>Vehicle License Number</p>
-						<input
-							type='number'
-							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='Vehicle License Number'
-							// value={type}
-							// onChange={(e) => setType(e.target.value)}
-						/>
-					</div>
 					<div className='space-y-3 w-1/2 pl-8'>
 						<div className='text-md font-bold space-y-1 mt-5'>
 							<p>Driving School Certificate Number</p>

@@ -132,12 +132,12 @@ const Dashboard = () => {
 						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-20 m-5'>
 							<p>Signed Up</p>
 							<p>
-								Vehicle <br /> Registration
+								Pending <br /> Registration
 							</p>
 							<p>
-								Driver's License <br /> Registration
+								Approve <br /> Registration
 							</p>
-							<p>Success</p>
+							<p>Success <br /> Particular Ready</p>
 						</div>
 						<div className='p-7 mt-5 w-full'>
 							<Outlet />

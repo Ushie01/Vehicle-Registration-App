@@ -44,7 +44,7 @@ const AdminDashboard = () => {
 						</Link>
 					</div>
 				</div>
-				<div className='flex-grow bg-white h-[1400px]'>
+				<div className='flex-grow bg-white h-[1400px] w-9/12'>
 					<div className='flex flex-col items-center justify-start p-4'>
 						<div className='p-7 mt-5 w-full'>
 							<Outlet />

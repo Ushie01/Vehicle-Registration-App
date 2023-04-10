@@ -83,3 +83,16 @@ export const acceptLicenseDocument = async (payload) => {
         console.log(error)
     }
 }
+
+export const vehicleReg = async (formData) => {
+    try {
+        const response = await fetch(`${baseUrl}/user/vehicleRegistration`, {
+            method: 'POST',
+            body: formData,
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+

@@ -5,6 +5,7 @@ import { validateLogin } from '../validate';
 import car from "./../assests/car1.jpg";
 
 const Signin = () => {
+  const user = JSON.parse(localStorage.getItem('user')) || [];
   const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -16,13 +17,22 @@ const Signin = () => {
 		event.preventDefault();
 		const payload = { email, password };
 		setError(validateLogin(payload));
-		// setSubmitted(true);
 		const response = await login(payload);
 		const finalResponse = await response.json();
-    console.log(finalResponse.message);
+
 		if (finalResponse.message.includes("Successfully")) {
-			localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));
-		    navigate('/');
+      localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));
+      if (user.role === 'admin') {
+        setTimeout(() => {
+          navigate('/admin/Dashboard');
+        }, 1000);
+      }
+
+      if (user.role === 'user') {
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
+      }
 		} else {
 			// setSubmitted(false);
 			setErr(finalResponse?.message);

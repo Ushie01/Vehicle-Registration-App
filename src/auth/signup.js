@@ -16,7 +16,6 @@ const Signin = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
 	const [error, setError] = useState('');
   const [err, setErr] = useState([]);
-  console.log(user);
   
 	const handleLogin = async (event) => {
 		event.preventDefault();
@@ -34,6 +33,18 @@ const Signin = () => {
 		const finalResponse = await response.json();
 		if (finalResponse.message.includes("successfully")) {
 			localStorage.setItem('user', JSON.stringify(finalResponse?.data));      
+      if (user.role === 'admin') {
+        setTimeout(() => {
+          navigate('/admin/Dashboard');
+        }, 1000);
+      }
+
+      if (user.role === 'user') {
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
+      }
+
       setErr(finalResponse.message);
       setFirstName('');
       setLastName('');
@@ -41,9 +52,6 @@ const Signin = () => {
       setPhoneNo('');
       setPassword('');
       setConfirmPassword('');
-      setTimeout(() => {
-        navigate('/');
-			}, 3000);
       
 		} else {
 			// setSubmitted(false);
