@@ -24,7 +24,7 @@ const DriverLensRegList = () => {
 			<form
 				action=''
 				className='p-6 border-2 mt-8'>
-				<table class="table-fixed">
+				<table className="table-fixed">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -43,13 +43,27 @@ const DriverLensRegList = () => {
                             <th>updatedAt</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                            <td>Malcolm Lockyer</td>
-                            <td>1961</td>
-                        </tr>
-                    </tbody>
+                    {/* <tbody>
+                        {
+                            agent.map((doc, value) => (
+                                <tr key={value}>
+                                    <td>{doc.firstName}</td>
+                                    <td>{doc.lastName}</td>
+                                    <td>{doc.email}</td>
+                                    <td>{doc.homeAddress}</td>
+                                    <td>{doc.city}</td>
+                                    <td>{doc.state}</td>
+                                    <td>{doc.phoneNo}</td>
+                                    <td>{doc.vehicleRegNo}</td>
+                                    <td>{doc.drivingSchCert}</td>
+                                    <td>{doc.licenseRegNo}</td>
+                                    <td>{doc.status}</td>
+                                    <td>{doc.crreatedAt}</td>
+                                    <td>{doc.updatedAt}</td>
+                                </tr>
+                            ))
+                        }
+                    </tbody> */}
                 </table>
 			</form>
 		</>
