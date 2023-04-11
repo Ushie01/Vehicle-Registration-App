@@ -32,18 +32,18 @@ const Signin = () => {
 		const response = await signUp(payload);
 		const finalResponse = await response.json();
 		if (finalResponse.message.includes("successfully")) {
-			localStorage.setItem('user', JSON.stringify(finalResponse?.data));      
-      if (user.role === 'admin') {
-        setTimeout(() => {
-          navigate('/admin/Dashboard');
-        }, 1000);
-      }
-
+      localStorage.setItem('user', JSON.stringify(finalResponse?.data));   
       if (user.role === 'user') {
         setTimeout(() => {
           navigate('/')
         }, 1000)
-      }
+      };
+
+      if (user.role === 'admin') {
+        setTimeout(() => {
+          navigate('/admin/Dashboard');
+        }, 1000);
+      };
 
       setErr(finalResponse.message);
       setFirstName('');
@@ -178,7 +178,7 @@ const Signin = () => {
                 className="flex items-center justify-center mb-8 py-2 space-x-3 w-full rounded-xl hover:bg-violet-400  
                 hover:shadow-lg hover:-translate-y-0.5 transition duration-150 bg-violet-500"
               >
-                <span className="text-white font-sans">Login</span>
+                <span className="text-white font-sans">SignUp</span>
               </button>
             </div>
           </div>

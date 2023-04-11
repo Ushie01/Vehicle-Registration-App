@@ -96,3 +96,42 @@ export const vehicleReg = async (formData) => {
     }
 }
 
+export const licenseReg = async (formData) => {
+    try {
+        const response = await fetch(`${baseUrl}/user/driverLicenseRegistration`, {
+            method: 'POST',
+            body: formData,
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getUserVehDoc = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/user/getUserVehDoc`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }));
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+ export const getUserLicDoc = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/user/getUserLicDoc`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }));
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import add from './../../assests/plus-lg.svg';
+import { licenseReg } from '../../helper/api';
 
 const DriverLensRegistration = () => {
 	const [firstName, setFirstName] = useState('');
@@ -9,20 +10,47 @@ const DriverLensRegistration = () => {
 	const [city, setCity] = useState('');
 	const [phoneNo, setPhoneNo] = useState('');
 	const [state, setState] = useState('');
-	// const [vehicleMake, setVehicl]
+	const [vehicleRegNo, setVehicleRegNo] = useState('');
+	const [drivingSchCert, setDrivingSchCert] = useState('');
+	const [error, setError] = useState('');
+
+	const onHandleSubmit = async (e) => {
+		const formData = new FormData();
+		formData.append('firstName', firstName);
+		formData.append('lastName', lastName);
+		formData.append('email', email);
+		formData.append('homeAddress', homeAddress);
+		formData.append('city', city);
+		formData.append('phoneNo', phoneNo);
+		formData.append('state', state);
+		formData.append('vehicleRegNo', vehicleRegNo);
+		formData.append('file', drivingSchCert);
+
+		try {
+			const res = await licenseReg(formData);
+			const finalRes = await res.json();
+			console.log(finalRes);
+			setTimeout(() => {
+				window.location.reload('/Dashboard')
+			}, 3000);
+		} catch (error) {
+			console.error(error)
+		}
+	}
+	
 	const handleFileUpload = (event) => {
-		// const file = event.target.files[0];
-		// const fileNameParts = file.name.split('.');
-		// const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
-		// if (file && !['jpeg', 'png', 'jpg', 'svg+xml'].includes(fileExtension)) {
-		// 	setError(
-		// 		'File type not supported. Please select a jpeg, png, jpg, or svg file.'
-		// 	);
-		// 	setFileName('');
-		// } else {
-		// 	setFileName(file);
-		// 	setError('');
-		// }
+		const file = event.target.files[0];
+		const fileNameParts = file.name.split('.');
+		const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
+		if (file && !['jpeg', 'png', 'jpg', 'svg+xml'].includes(fileExtension)) {
+			setError(
+				'File type not supported. Please select a jpeg, png, jpg, or svg file.'
+			);
+			setDrivingSchCert('');
+		} else {
+			setDrivingSchCert(file);
+			setError('');
+		}
 	};
 
 	return (
@@ -81,11 +109,21 @@ const DriverLensRegistration = () => {
 					<div className='space-y-3 w-1/2 pr-8'>
 						<p>City</p>
 						<input
-							type='email'
+							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='City'
 							value={city}
 							onChange={(e) => setCity(e.target.value)}
+						/>
+					</div>
+					<div className='space-y-3 w-1/2 pr-8'>
+						<p>Vehicle Reg No</p>
+						<input
+							type='text'
+							className='h-16 w-full border-2 rounded-xl p-2'
+							placeholder='vehicle Reg No'
+							value={vehicleRegNo}
+							onChange={(e) => setVehicleRegNo(e.target.value)}
 						/>
 					</div>
 				</div>
@@ -93,7 +131,7 @@ const DriverLensRegistration = () => {
 					<div className='space-y-3 w-1/2 pr-8'>
 						<p>Mobile Number</p>
 						<input
-							type='number'
+							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
 							placeholder='Mobile Number'
 							value={phoneNo}
@@ -134,7 +172,7 @@ const DriverLensRegistration = () => {
 						</div>
 					</div>
                 </div>
-                <button className="h-16 w-full bg-cyan-400 mt-10 rounded-xl text-white text-extrabold hover:bg-cyan-500 font-extrabold">Apply</button>
+                <button onClick={onHandleSubmit} className="h-16 w-full bg-cyan-400 mt-10 rounded-xl text-white text-extrabold hover:bg-cyan-500 font-extrabold">Apply</button>
 			</form>
 		</>
 	);

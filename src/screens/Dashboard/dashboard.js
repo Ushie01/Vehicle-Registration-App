@@ -62,16 +62,6 @@ const Dashboard = () => {
 								<p>Driver Licence Verification</p>
 							</div>
 						</Link>
-						<Link to='/Dashboard/plateNoVerification'>
-							<div className='flex flex-row items-center justify-start shadow-lg w-full font-bold rounded-lg space-x-4 p-3 text-2xl bg-white'>
-								<img
-									src={sign}
-									alt={sign}
-									className='h-5 w-5'
-								/>
-								<p>Verify Your Number Plate</p>
-							</div>
-						</Link>
 					</div>
 				</div>
 				<div className='flex-grow bg-white h-[1400px]'>
