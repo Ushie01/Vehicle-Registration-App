@@ -8,7 +8,6 @@ import {
 
 const VehicleRegList = () => {
     const [agent, setAgent] = useState([]);
-
     const getAgents = async () => {
 		const response = await getAllVehicleReg();
 		const data = await response.json();

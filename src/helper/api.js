@@ -108,23 +108,42 @@ export const licenseReg = async (formData) => {
     }
 }
 
-export const getUserVehDoc = async (payload) => {
+// export const getUserVehDoc = async (phoneNo) => {
+//     try {
+//       console.log(phoneNo)
+//     const response = await fetch(`${baseUrl}/user/getUserVehDocument?phoneNo=08162725781`, {
+//       method: 'GET',
+//       headers: {
+//         'Content-type': 'application/json'
+//       }
+//     });
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+
+export const getUserVehDoc = async (phoneNo) => {
     try {
-        return await (await fetch(`${baseUrl}/user/getUserVehDoc`, {
+        const url = new URL(`${baseUrl}/user/getUserVehDocument`);
+        url.searchParams.append('phoneNo', phoneNo);
+        const res = await fetch(url, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        }));
+            }
+        });
+        return await res.json();
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
+
 
  export const getUserLicDoc = async (payload) => {
     try {
-        return await (await fetch(`${baseUrl}/user/getUserLicDoc`, {
+        return await (await fetch(`${baseUrl}/user/getUserLicDocument`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json'
