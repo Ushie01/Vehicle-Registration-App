@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { vehicleReg } from "../../helper/api";
 import { validateVehicleReg } from "../../validate";
-import add from "./../../assests/plus-lg.svg"
+import add from "./../../assests/plus-lg.svg";
+import account from './../../assests/person-circle.svg';
+import sign from './../../assests/sign.svg';
+import check from './../../assests/check.svg';
 
 const VehicleRegistration = () => {
     const user = JSON.parse(localStorage.getItem('user')) || [];
@@ -19,7 +22,10 @@ const VehicleRegistration = () => {
     const [driverLicense, setDriverLicense] = useState('');
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    const [err, setErr] = useState('')
+    const [err, setErr] = useState('');
+    const ship = 'Shipping';
+	const arrive = 'Arriving';
+	const success = 'Success';
 
 
     const onHandleSubmit = async (e) => {
@@ -118,6 +124,71 @@ const VehicleRegistration = () => {
     
     return (
         <>
+					<div className='flex flex-col items-center justify-start p-4'>
+						<p className='text-black text-2xl'>
+							Tracking your registration progress
+						</p>
+						<div className='flex flex-row items-center justify-center mt-5'>
+							<div className='flex h-16 w-16 text-3xl bg-cyan-400 shadow-2xl rounded-full'>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>
+							<hr
+								className={`h-1 w-28 ${!ship ? 'bg-cyan-400' : 'bg-gray-400'}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!ship ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>{' '}
+							<hr
+								className={`h-1 w-28 ${!arrive ? 'bg-cyan-400' : 'bg-gray-400'}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!arrive ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>{' '}
+							<hr
+								className={`h-1 w-28 ${
+									!success ? 'bg-cyan-400' : 'bg-gray-400'
+								}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!ship ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>
+						</div>
+						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-20 m-5'>
+							<p>Signed Up</p>
+							<p>
+								Pending <br /> Registration
+							</p>
+							<p>
+								Approve <br /> Registration
+							</p>
+							<p>Success <br /> Particular Ready</p>
+						</div>
+						<div className='p-7 mt-5 w-full'>
             <p className='text-4xl font-bold'><span className="text-gray-400">|</span> Vehicle Registration</p>
                 <form
                     action=''
@@ -361,8 +432,12 @@ const VehicleRegistration = () => {
                 </div>
                 <button onClick={onHandleSubmit} disabled={submitted} className={`h-16 w-full  mt-10 rounded-xl text-white font-extrabold hover:bg-cyan-500 ${submitted ? 'bg-cyan-200' : 'bg-cyan-400' }`}>Submit</button>
             </form>
+							
+            </div>
+        </div>
         </>
     )
 }
 
 export default VehicleRegistration;
+

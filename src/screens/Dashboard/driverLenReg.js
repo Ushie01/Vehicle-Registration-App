@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import add from './../../assests/plus-lg.svg';
 import { licenseReg } from '../../helper/api';
+import account from './../../assests/person-circle.svg';
+import sign from './../../assests/sign.svg';
+import check from './../../assests/check.svg';
+
 
 const DriverLensRegistration = () => {
 	const [firstName, setFirstName] = useState('');
@@ -13,6 +17,9 @@ const DriverLensRegistration = () => {
 	const [vehicleRegNo, setVehicleRegNo] = useState('');
 	const [drivingSchCert, setDrivingSchCert] = useState('');
 	const [error, setError] = useState('');
+	const ship = 'Shipping';
+	const arrive = 'Arriving';
+	const success = 'Success';
 
 	const onHandleSubmit = async (e) => {
 		const formData = new FormData();
@@ -55,6 +62,74 @@ const DriverLensRegistration = () => {
 
 	return (
 		<>
+					<div className='flex flex-col items-center justify-start p-4'>
+						<p className='text-black text-2xl'>
+							Tracking your registration progress
+						</p>
+						<div className='flex flex-row items-center justify-center mt-5'>
+							<div className='flex h-16 w-16 text-3xl bg-cyan-400 shadow-2xl rounded-full'>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>
+							<hr
+								className={`h-1 w-28 ${!ship ? 'bg-cyan-400' : 'bg-gray-400'}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!ship ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>{' '}
+							<hr
+								className={`h-1 w-28 ${!arrive ? 'bg-cyan-400' : 'bg-gray-400'}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!arrive ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>{' '}
+							<hr
+								className={`h-1 w-28 ${
+									!success ? 'bg-cyan-400' : 'bg-gray-400'
+								}`}
+							/>
+							<div
+								className={`flex h-16 w-16 text-3xl ${
+									!ship ? 'bg-cyan-400' : 'bg-gray-400'
+								} shadow-2xl rounded-full`}>
+								<img
+									src={check}
+									alt={check}
+									className='m-auto h-12 w-12'
+								/>
+							</div>
+						</div>
+						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-20 m-5'>
+							<p>Signed Up</p>
+							<p>
+								Pending <br /> Registration
+							</p>
+							<p>
+								Approve <br /> Registration
+							</p>
+							<p>Success <br /> Particular Ready</p>
+						</div>
+						{/* <div className='p-7 mt-5 w-full'> */}
+							{/* <Outlet /> */}
+						{/* </div> */}
+					</div>
 			<p className='text-4xl font-bold'>
 				<span className='text-gray-400'>|</span> Driver's License Registration
 			</p>
