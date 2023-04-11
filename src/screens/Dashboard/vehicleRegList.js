@@ -102,14 +102,14 @@ const VehicleRegList = () => {
                                     <td className="p-5">{doc.updatedAt}</td>
                                     <td className="p-5">
                                         <button 
-                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'TRUE'})}
+                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'true'})}
                                             className="bg-green-600 rounded-md shadow-md font-bold text-white p-3">
                                             Accept
                                         </button>
                                     </td>
                                     <td className="p-5">
                                         <button 
-                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'FALSE'})}
+                                            onClick={() => handleAcceptDoc({phoneNo: doc.phoneNo, status: 'false'})}
                                             className="bg-red-600 rounded-md shadow-md font-bold text-white p-3">
                                             Reject
                                         </button>

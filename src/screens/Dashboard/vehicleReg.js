@@ -6,6 +6,7 @@ import account from './../../assests/person-circle.svg';
 import sign from './../../assests/sign.svg';
 import check from './../../assests/check.svg';
 
+
 const VehicleRegistration = () => {
     const user = JSON.parse(localStorage.getItem('user')) || [];
     const [vehicleCategory, setVehicleCategory] = useState('');
@@ -23,9 +24,6 @@ const VehicleRegistration = () => {
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [err, setErr] = useState('');
-    const ship = 'Shipping';
-	const arrive = 'Arriving';
-    const success = 'Success';
     const [agent, setAgent] = useState([]);
 
     const userAgent = agent.filter(value => (value.phoneNo === user.phoneNo));
@@ -138,7 +136,16 @@ const VehicleRegistration = () => {
     
     return (
         <>
-        <div className='flex flex-col items-center justify-start p-4'>
+			{
+				finalUserAgent.vehicleRegNo
+				&&
+				<div className="flex items-center justify-start pl-12 font-extrabold">
+					<p className="text-xl text-cyan-400 shadow-xl p-2 rounded-lg">
+						{`vehicle reg: ${finalUserAgent.vehicleRegNo}`}
+					</p>
+				</div>
+			}
+            <div className='flex flex-col items-center justify-start p-4'>
             <p className='text-black text-2xl'>
                 Tracking your registration progress
             </p>
@@ -159,7 +166,7 @@ const VehicleRegistration = () => {
                     <>
                         <div
                             className={`flex h-16 w-16 text-3xl ${
-                                !finalUserAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
+                                finalUserAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
                             } shadow-2xl rounded-full`}>
                             <img
                                 src={check}
@@ -336,7 +343,7 @@ const VehicleRegistration = () => {
                     
                     <div className='flex flex-row items-center justify-between mt-6 font-bold'>
                         <div className='space-y-3 w-1/2 pr-8'>
-                            <p>Engine Capicity</p>
+                            <p>Engine Capicity(with unit*)</p>
                             <input
                                 type='text'
                                 className='h-16 w-full border-2 rounded-xl p-2'
@@ -350,7 +357,7 @@ const VehicleRegistration = () => {
                         </div>
                     
                         <div className='space-y-3 w-1/2 pl-8'>
-                            <p>Tank Capacity</p>
+                            <p>Tank Capacity(with unit*)</p>
                             <input
                                 type='text'
                                 className='h-16 w-full border-2 rounded-xl p-2'

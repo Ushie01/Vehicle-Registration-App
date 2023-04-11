@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import add from './../../assests/plus-lg.svg';
-import { licenseReg } from '../../helper/api';
+import { licenseReg, getAllLicenseReg } from '../../helper/api';
 import account from './../../assests/person-circle.svg';
 import sign from './../../assests/sign.svg';
 import check from './../../assests/check.svg';
 
 
 const DriverLensRegistration = () => {
+	const user = JSON.parse(localStorage.getItem('user')) || [];
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
@@ -17,9 +18,20 @@ const DriverLensRegistration = () => {
 	const [vehicleRegNo, setVehicleRegNo] = useState('');
 	const [drivingSchCert, setDrivingSchCert] = useState('');
 	const [error, setError] = useState('');
-	const ship = 'Shipping';
-	const arrive = 'Arriving';
-	const success = 'Success';
+	const [agent, setAgent] = useState([]);
+
+    const userAgent = agent?.filter(value => (value.phoneNo === user.phoneNo));
+    const finalUserAgent = Object.assign({}, ...userAgent);
+
+    useEffect(() => {
+        const getAgents = async () => {
+            const response = await getAllLicenseReg();
+            const data = await response.json();
+            setAgent(data?.finalResult);
+        };
+        getAgents();
+    }, []);
+    
 
 	const onHandleSubmit = async (e) => {
 		const formData = new FormData();
@@ -62,74 +74,107 @@ const DriverLensRegistration = () => {
 
 	return (
 		<>
-					<div className='flex flex-col items-center justify-start p-4'>
-						<p className='text-black text-2xl'>
-							Tracking your registration progress
-						</p>
-						<div className='flex flex-row items-center justify-center mt-5'>
-							<div className='flex h-16 w-16 text-3xl bg-cyan-400 shadow-2xl rounded-full'>
-								<img
-									src={check}
-									alt={check}
-									className='m-auto h-12 w-12'
-								/>
-							</div>
-							<hr
-								className={`h-1 w-28 ${!ship ? 'bg-cyan-400' : 'bg-gray-400'}`}
-							/>
-							<div
-								className={`flex h-16 w-16 text-3xl ${
-									!ship ? 'bg-cyan-400' : 'bg-gray-400'
-								} shadow-2xl rounded-full`}>
-								<img
-									src={check}
-									alt={check}
-									className='m-auto h-12 w-12'
-								/>
-							</div>{' '}
-							<hr
-								className={`h-1 w-28 ${!arrive ? 'bg-cyan-400' : 'bg-gray-400'}`}
-							/>
-							<div
-								className={`flex h-16 w-16 text-3xl ${
-									!arrive ? 'bg-cyan-400' : 'bg-gray-400'
-								} shadow-2xl rounded-full`}>
-								<img
-									src={check}
-									alt={check}
-									className='m-auto h-12 w-12'
-								/>
-							</div>{' '}
-							<hr
-								className={`h-1 w-28 ${
-									!success ? 'bg-cyan-400' : 'bg-gray-400'
-								}`}
-							/>
-							<div
-								className={`flex h-16 w-16 text-3xl ${
-									!ship ? 'bg-cyan-400' : 'bg-gray-400'
-								} shadow-2xl rounded-full`}>
-								<img
-									src={check}
-									alt={check}
-									className='m-auto h-12 w-12'
-								/>
-							</div>
-						</div>
-						<div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-20 m-5'>
-							<p>Signed Up</p>
-							<p>
-								Pending <br /> Registration
-							</p>
-							<p>
-								Approve <br /> Registration
-							</p>
-							<p>Success <br /> Particular Ready</p>
-						</div>
-						{/* <div className='p-7 mt-5 w-full'> */}
-							{/* <Outlet /> */}
-						{/* </div> */}
-					</div>
+			{
+				finalUserAgent.licenseRegNo
+				&&
+				<div className="flex items-center justify-start pl-12 font-extrabold">
+					<p className="text-xl text-cyan-400 shadow-xl p-2 rounded-lg">
+						{`license reg: ${finalUserAgent.licenseRegNo}`}
+					</p>
+				</div>
+			}
+
+		<div className='flex flex-col items-center justify-start p-4'>
+            <p className='text-black text-2xl'>
+                Tracking your registration progress
+            </p>
+            <div className='flex flex-row items-center justify-center mt-5'>
+                <div className='flex h-16 w-16 text-3xl bg-cyan-400 shadow-2xl rounded-full'>
+                    <img
+                        src={check}
+                        alt={check}
+                        className='m-auto h-12 w-12'
+                    />
+                </div>
+                <hr
+                    className={`h-1 w-28 ${user ? 'bg-cyan-400' : 'bg-gray-400'}`}
+                />
+                {
+                    finalUserAgent?.status === 'false' 
+                    && 
+                    <>
+                        <div
+                            className={`flex h-16 w-16 text-3xl ${
+                                finalUserAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
+                            } shadow-2xl rounded-full`}>
+                            <img
+                                src={check}
+                                alt={check}
+                                className='m-auto h-12 w-12'
+                            />
+                        </div>{' '}
+                        <hr
+                            className={`h-1 w-28 ${!finalUserAgent?.status === 'false' ? 'bg-cyan-400' : 'bg-gray-400'}`}
+                        />
+                    </>
+                }
+                {
+                    finalUserAgent?.status === 'true' 
+                    &&
+                    <>
+                        <div
+                            className={`flex h-16 w-16 text-3xl ${
+                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                            } shadow-2xl rounded-full`}>
+                            <img
+                                src={check}
+                                alt={check}
+                                className='m-auto h-12 w-12'
+                            />
+                        </div>{' '}
+                        <hr
+                            className={`h-1 w-28 ${
+                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                            }`}
+                        />
+                    </>     
+                }
+
+                <div
+                    className={`flex h-16 w-16 text-3xl ${
+                        finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                    } shadow-2xl rounded-full`}>
+                    <img
+                        src={check}
+                        alt={check}
+                        className='m-auto h-12 w-12'
+                    />
+                </div>
+            </div>
+            <div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-24 m-5'>
+                    <p>Signed Up</p>
+                    {
+                        finalUserAgent?.status === 'false'
+                        &&
+                        <>
+                            <p className="ml-20">
+                                Pending <br /> Registration
+                            </p>
+                        </>
+                    }
+                    {
+                        finalUserAgent?.status === 'true'
+                        &&
+                        <>
+                            <p>
+                                Approve <br /> Registration
+                            </p>
+                        </>
+                    }
+
+                  <p>Particular <br /> Ready</p>
+                </div>
+			</div>
 			<p className='text-4xl font-bold'>
 				<span className='text-gray-400'>|</span> Driver's License Registration
 			</p>
@@ -191,12 +236,12 @@ const DriverLensRegistration = () => {
 							onChange={(e) => setCity(e.target.value)}
 						/>
 					</div>
-					<div className='space-y-3 w-1/2 pr-8'>
+					<div className='space-y-3 w-1/2 pl-8'>
 						<p>Vehicle Reg No</p>
 						<input
 							type='text'
 							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='vehicle Reg No'
+							placeholder='Vehicle Reg No'
 							value={vehicleRegNo}
 							onChange={(e) => setVehicleRegNo(e.target.value)}
 						/>
