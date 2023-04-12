@@ -5,7 +5,7 @@ import { validateLogin } from '../validate';
 import car from "./../assests/car1.jpg";
 
 const Signin = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || [];
+  // const user = JSON.parse(localStorage.getItem('user')) || [];
   const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -18,28 +18,32 @@ const Signin = () => {
 		const payload = { email, password };
 		setError(validateLogin(payload));
 		const response = await login(payload);
-		const finalResponse = await response.json();
+    const finalResponse = await response.json();
 
-		if (finalResponse.message.includes("Successfully")) {
-      localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));
-      if (user.role === 'admin') {
-        setTimeout(() => {
-          navigate('/admin/Dashboard');
-        }, 1000);
-      }
-
-      if (user.role === 'user') {
-        setTimeout(() => {
-          navigate('/')
-        }, 1000)
-      }
+    if (
+      finalResponse.message.includes("Successfully") && 
+      finalResponse?.userDetails?.role === 'admin'
+    ) {
+      localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));   
+      setErr(finalResponse?.message)
+      setTimeout(() => {
+        navigate('/admin/Dashboard');
+      }, 2000);
+    } else if (
+			finalResponse.message.includes('Successfully') &&
+			finalResponse?.userDetails?.role === 'user'
+		) {
+      localStorage.setItem('user', JSON.stringify(finalResponse?.userDetails));  
+      setErr(finalResponse?.message)
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
 		} else {
-			// setSubmitted(false);
 			setErr(finalResponse?.message);
 			setTimeout(() => {
 				setErr('');
 			}, 7000);
-		}
+    }
   };
   
   return (
@@ -71,8 +75,9 @@ const Signin = () => {
                   {error.email}
                 </p>
               )}
+
               <input
-                type="text"
+                type="password"
                 className="w-full p-4 border-b-2 hover:border-opacity-0 mb-3"
                 placeholder="Password"
                 value={password}

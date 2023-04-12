@@ -11,6 +11,7 @@ import ote from '../assests/ote.png';
 const Home = () => {
     const user = JSON.parse(localStorage.getItem('user')) || [];
 	
+	
 	return (
 		<>
 			<Header />

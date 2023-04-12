@@ -4,7 +4,6 @@ import { getAllLicenseReg, acceptLicenseDocument } from '../../helper/api';
 
 const DriverLensRegList = () => {
     const [agent, setAgent] = useState([]);
-
     const getAgents = async () => {
 		const response = await getAllLicenseReg();
 		const data = await response.json();
@@ -29,7 +28,7 @@ const DriverLensRegList = () => {
             <p className='text-4xl font-bold'><span className="text-gray-400">|</span> Driver Vehicle Registration List</p>
 			<div
 				action=''
-				className='p-6 border-2 mt-8'>
+				className='p-6 border-2 mt-8 overflow-x-auto'>
 				<table className="">
                     <thead>
                         <tr>
@@ -50,7 +49,10 @@ const DriverLensRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Reject Document</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {
+                        agent 
+                        && 
+                        <tbody>
                         {
                             agent.map((doc, value) => (
                                 <tr key={value} className="text-start space-x-5">
@@ -93,6 +95,7 @@ const DriverLensRegList = () => {
                             ))
                         }
                     </tbody>
+                    }
                 </table>
 			</div>
         </>

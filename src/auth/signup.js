@@ -6,7 +6,6 @@ import car from './../assests/car1.jpg';
 
 
 const Signin = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || [];
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -31,35 +30,27 @@ const Signin = () => {
 		// setSubmitted(true);
 		const response = await signUp(payload);
 		const finalResponse = await response.json();
-		if (finalResponse.message.includes("successfully")) {
-      localStorage.setItem('user', JSON.stringify(finalResponse?.data));   
-      if (user.role === 'user') {
-        setTimeout(() => {
-          navigate('/')
-        }, 1000)
-      };
-
-      if (user.role === 'admin') {
-        setTimeout(() => {
-          navigate('/admin/Dashboard');
-        }, 1000);
-      };
-
-      setErr(finalResponse.message);
+    if (
+			finalResponse.message.includes('successfully') &&
+			finalResponse?.data?.role === 'user'
+		) {
+      localStorage.setItem('user', JSON.stringify(finalResponse?.data));  
+      setErr(finalResponse?.message);
       setFirstName('');
       setLastName('');
       setEmail('');
       setPhoneNo('');
       setPassword('');
       setConfirmPassword('');
-      
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
 		} else {
-			// setSubmitted(false);
-			setErr(finalResponse.message);
+			setErr(finalResponse?.message);
 			setTimeout(() => {
 				setErr('');
 			}, 7000);
-		}
+    }
   };
 
   return (

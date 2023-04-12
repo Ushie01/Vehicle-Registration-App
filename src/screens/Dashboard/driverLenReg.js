@@ -19,9 +19,7 @@ const DriverLensRegistration = () => {
 	const [drivingSchCert, setDrivingSchCert] = useState('');
 	const [error, setError] = useState('');
 	const [agent, setAgent] = useState([]);
-
-    const userAgent = agent?.filter(value => (value.phoneNo === user.phoneNo));
-    const finalUserAgent = Object.assign({}, ...userAgent);
+    const [userAgent, setUserAgent] = useState({});
 
     useEffect(() => {
         const getAgents = async () => {
@@ -31,6 +29,14 @@ const DriverLensRegistration = () => {
         };
         getAgents();
     }, []);
+
+    useEffect(() => {
+        if (agent?.length > 0) {
+            const filteredAgents = agent.filter(value => (value.phoneNo === user.phoneNo));
+            const finalUserAgent = Object.assign({}, ...filteredAgents);
+            setUserAgent(finalUserAgent);   
+        }
+    }, [agent, user.phoneNo]);
     
 
 	const onHandleSubmit = async (e) => {
@@ -75,11 +81,11 @@ const DriverLensRegistration = () => {
 	return (
 		<>
 			{
-				finalUserAgent.licenseRegNo
+				userAgent.licenseRegNo
 				&&
 				<div className="flex items-center justify-start pl-12 font-extrabold">
 					<p className="text-xl text-cyan-400 shadow-xl p-2 rounded-lg">
-						{`license reg: ${finalUserAgent.licenseRegNo}`}
+						{`license reg: ${userAgent.licenseRegNo}`}
 					</p>
 				</div>
 			}
@@ -100,12 +106,12 @@ const DriverLensRegistration = () => {
                     className={`h-1 w-28 ${user ? 'bg-cyan-400' : 'bg-gray-400'}`}
                 />
                 {
-                    finalUserAgent?.status === 'false' 
+                    userAgent?.status === 'false' 
                     && 
                     <>
                         <div
                             className={`flex h-16 w-16 text-3xl ${
-                                finalUserAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
+                                userAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
                             } shadow-2xl rounded-full`}>
                             <img
                                 src={check}
@@ -114,17 +120,17 @@ const DriverLensRegistration = () => {
                             />
                         </div>{' '}
                         <hr
-                            className={`h-1 w-28 ${!finalUserAgent?.status === 'false' ? 'bg-cyan-400' : 'bg-gray-400'}`}
+                            className={`h-1 w-28 ${!userAgent?.status === 'false' ? 'bg-cyan-400' : 'bg-gray-400'}`}
                         />
                     </>
                 }
                 {
-                    finalUserAgent?.status === 'true' 
+                    userAgent?.status === 'true' 
                     &&
                     <>
                         <div
                             className={`flex h-16 w-16 text-3xl ${
-                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                                userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                             } shadow-2xl rounded-full`}>
                             <img
                                 src={check}
@@ -134,7 +140,7 @@ const DriverLensRegistration = () => {
                         </div>{' '}
                         <hr
                             className={`h-1 w-28 ${
-                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                                userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                             }`}
                         />
                     </>     
@@ -142,7 +148,7 @@ const DriverLensRegistration = () => {
 
                 <div
                     className={`flex h-16 w-16 text-3xl ${
-                        finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                        userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                     } shadow-2xl rounded-full`}>
                     <img
                         src={check}
@@ -154,7 +160,7 @@ const DriverLensRegistration = () => {
             <div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-24 m-5'>
                     <p>Signed Up</p>
                     {
-                        finalUserAgent?.status === 'false'
+                        userAgent?.status === 'false'
                         &&
                         <>
                             <p className="ml-20">
@@ -163,7 +169,7 @@ const DriverLensRegistration = () => {
                         </>
                     }
                     {
-                        finalUserAgent?.status === 'true'
+                        userAgent?.status === 'true'
                         &&
                         <>
                             <p>

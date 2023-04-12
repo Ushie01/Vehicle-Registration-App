@@ -2,41 +2,53 @@ import { useState, useEffect } from "react";
 import { getAllVehicleReg } from "../../helper/api";
 
 const VehicleVerification = () => {
-	const user = JSON.parse(localStorage.getItem('user')) || [];
-	const [agent, subAgent] = useState([]);
+	const user = JSON.parse(localStorage.getItem('user')) || {};
+	const [agent, setAgent] = useState([]);
 	const [inputText, setInputText] = useState('');
 	const [res, setRes] = useState('');
-    const userAgent = agent.filter(value => (value.phoneNo === user.phoneNo));
-    const finalUserAgent = Object.assign({}, ...userAgent);
+	const [userAgent, setUserAgent] = useState({});
 
 	const handleVehicleReg = (e) => {
 		e.preventDefault();
-		if (finalUserAgent?.vehicleRegNo === inputText && finalUserAgent?.status === 'true') {
-			setRes(`your vehicle registration number ${finalUserAgent.vehicleRegNo} is verify`)
+		if (userAgent?.vehicleRegNo === inputText && userAgent?.status === 'true') {
+			setRes(`your vehicle registration number ${userAgent.vehicleRegNo} is verified`)
 			setTimeout(() => {
 				setRes('')
 			}, 7000);
-		} else if (finalUserAgent?.vehicleRegNo === inputText && finalUserAgent?.status === 'false') {
+		} else if (userAgent?.vehicleRegNo === inputText && userAgent?.status === 'false') {
 			setRes('your vehicle registration number is still pending approval')
 			setTimeout(() => {
-                setRes('')
+				setRes('')
 			}, 7000);
 		} else {
 			setRes(`please input your correct reg no to verify`)
 			setTimeout(() => {
-                setRes('')
-			}, 7000);	
+				setRes('')
+			}, 7000);    
 		}
 	}
 
-    useEffect(() => {
-        const getAgents = async () => {
-            const response = await getAllVehicleReg();
-            const data = await response.json();
-            subAgent(data?.finalResult);
-        };
-        getAgents();
-    }, []);
+	useEffect(() => {
+		const getAgents = async () => {
+			const response = await getAllVehicleReg();
+			const data = await response.json();
+			setAgent(data?.finalResult);
+		};
+		getAgents();
+	}, []);
+
+	useEffect(() => {
+		if (agent?.length > 0 && Object.keys(user)?.length > 0) {
+			const filteredAgents = agent.filter(value => (value.phoneNo === user.phoneNo));
+			if (filteredAgents.length > 0) {
+				const finalUserAgent = Object.assign({}, ...filteredAgents);
+				setUserAgent(finalUserAgent);
+			} else {
+				setUserAgent({});
+			}
+		}
+	}, [agent, user.phoneNo]);
+
 
 	return (
 			<>

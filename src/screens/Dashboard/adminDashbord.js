@@ -2,13 +2,9 @@ import { Outlet, Link } from 'react-router-dom';
 import Header from '../../components/header';
 import account from './../../assests/person-circle.svg';
 import sign from './../../assests/sign.svg';
-import check from './../../assests/check.svg';
 
 const AdminDashboard = () => {
-	const ship = 'Shipping';
-	const arrive = 'Arriving';
-	const success = 'Success';
-
+	const user = JSON.parse(localStorage.getItem('user')) || [];
 	return (
 		<div className=''>
 			<Header />
@@ -20,7 +16,7 @@ const AdminDashboard = () => {
 						alt={account}
 						className='h-36 w-36'
 					/>
-					<p className='text-2xl mt-2 text-gray-500'>Ushie</p>
+					<p className='text-2xl mt-2 text-gray-500'>{ user.role}</p>
 					<div className='flex flex-col items-center text-gray-500 justify-start p-3 space-y-3 mt-24'>
 						<Link to='/admin/Dashboard/vehicleRegList'>
 							<div className='flex flex-row items-center justify-start shadow-lg w-full font-bold rounded-lg space-x-4 p-3 text-2xl bg-white'>

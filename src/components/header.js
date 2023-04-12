@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+	const user = JSON.parse(localStorage.getItem('user')) || [];
+	const navigate = useNavigate();
+
+	const handleLogOut = () => {
+		localStorage.removeItem('user');
+		navigate("/")
+	}
+
     return (
 			<>
 				<div className='p-7 sticky'>
@@ -16,18 +24,25 @@ const Header = () => {
 								<li>FAQs</li>
 								<li>Contact Us</li>
 							</ul>
-							<div className='space-x-4'>
-								<Link to='/Signup'>
-									<button className='w-32 rounded-md text-white font-bold p-2 bg-violet-500'>
-										Sign Up
-									</button>
-								</Link>
-								<Link to='/Signin'>
-									<button className='w-32 rounded-md text-violet-500 font-bold p-2 border-2 border-violet-500'>
-										Sign In
-									</button>
-								</Link>
-							</div>
+							{
+							    !user?.role ?
+								<div className='space-x-4'>
+									<Link to='/Signup'>
+										<button className='w-32 rounded-md text-white font-bold p-2 bg-violet-500'>
+											Sign Up
+										</button>
+									</Link>
+									<Link to='/Signin'>
+										<button className='w-32 rounded-md text-violet-500 font-bold p-2 border-2 border-violet-500'>
+											Sign In
+										</button>
+							    </Link>
+							     </div>
+								:
+								<button onClick={handleLogOut} className='w-32 rounded-md text-violet-500 font-bold p-2 border-2 border-violet-500'>
+									Log Out
+								</button>								
+						    }
 						</div>
 					</div>
 				</div>

@@ -32,7 +32,7 @@ const VehicleRegList = () => {
             <p className='text-4xl font-bold'><span className="text-gray-400">|</span> Vehicle Registration List</p>
 			<div
 				action=''
-				className='p-6 border-2 mt-8'>
+				className='p-6 border-2 mt-8 overflow-x-auto'>
 				<table className="">
                     <thead>
                         <tr>
@@ -56,7 +56,10 @@ const VehicleRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Reject Document</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    {
+                        agent 
+                        &&
+                       <tbody>
                         {
                             agent.map((doc, value) => (
                                 <tr key={value} className="text-start space-x-5">
@@ -118,6 +121,7 @@ const VehicleRegList = () => {
                             ))
                         }
                     </tbody>
+                    }
                 </table>
 			</div>
         </>

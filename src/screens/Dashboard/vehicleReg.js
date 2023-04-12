@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { vehicleReg, getAllVehicleReg } from "../../helper/api";
 import { validateVehicleReg } from "../../validate";
 import add from "./../../assests/plus-lg.svg";
-import account from './../../assests/person-circle.svg';
-import sign from './../../assests/sign.svg';
 import check from './../../assests/check.svg';
 
 
@@ -25,10 +23,7 @@ const VehicleRegistration = () => {
     const [submitted, setSubmitted] = useState(false);
     const [err, setErr] = useState('');
     const [agent, setAgent] = useState([]);
-
-    const userAgent = agent.filter(value => (value.phoneNo === user.phoneNo));
-    const finalUserAgent = Object.assign({}, ...userAgent);
-    // console.log(finalUserAgent)
+    const [userAgent, setUserAgent] = useState({});
 
     useEffect(() => {
         const getAgents = async () => {
@@ -38,6 +33,14 @@ const VehicleRegistration = () => {
         };
         getAgents();
     }, []);
+
+    useEffect(() => {
+        if (agent?.length > 0) {
+            const filteredAgents = agent.filter(value => (value.phoneNo === user.phoneNo));
+            const finalUserAgent = Object.assign({}, ...filteredAgents);
+            setUserAgent(finalUserAgent);   
+        }
+    }, [agent, user.phoneNo]);
     
 
     const onHandleSubmit = async (e) => {
@@ -76,10 +79,15 @@ const VehicleRegistration = () => {
         try {
             const res = await vehicleReg(formData);
             const finalRes = await res.json();
-            console.log(finalRes);
-            setTimeout(() => {
-                window.location.reload('/Dashboard')
-            }, 3000);
+            if (finalRes.message.includes('successfully')) {
+                setErr(finalRes.message);
+                setTimeout(() => {
+                    window.location.reload('/Dashboard')
+                }, 4000);
+            }
+            // setTimeout(() => {
+            //     window.location.reload('/Dashboard')
+            // }, 3000);
         } catch (error) {
             console.error(error)
         }
@@ -137,11 +145,11 @@ const VehicleRegistration = () => {
     return (
         <>
 			{
-				finalUserAgent.vehicleRegNo
+				userAgent.vehicleRegNo
 				&&
 				<div className="flex items-center justify-start pl-12 font-extrabold">
 					<p className="text-xl text-cyan-400 shadow-xl p-2 rounded-lg">
-						{`vehicle reg: ${finalUserAgent.vehicleRegNo}`}
+						{`vehicle reg: ${userAgent.vehicleRegNo}`}
 					</p>
 				</div>
 			}
@@ -161,12 +169,12 @@ const VehicleRegistration = () => {
                     className={`h-1 w-28 ${user ? 'bg-cyan-400' : 'bg-gray-400'}`}
                 />
                 {
-                    finalUserAgent?.status === 'false' 
+                    userAgent?.status === 'false' 
                     && 
                     <>
                         <div
                             className={`flex h-16 w-16 text-3xl ${
-                                finalUserAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
+                                userAgent?.status === 'false'  ? 'bg-cyan-400' : 'bg-gray-400'
                             } shadow-2xl rounded-full`}>
                             <img
                                 src={check}
@@ -175,17 +183,17 @@ const VehicleRegistration = () => {
                             />
                         </div>{' '}
                         <hr
-                            className={`h-1 w-28 ${!finalUserAgent?.status === 'false' ? 'bg-cyan-400' : 'bg-gray-400'}`}
+                            className={`h-1 w-28 ${!userAgent?.status === 'false' ? 'bg-cyan-400' : 'bg-gray-400'}`}
                         />
                     </>
                 }
                 {
-                    finalUserAgent?.status === 'true' 
+                    userAgent?.status === 'true' 
                     &&
                     <>
                         <div
                             className={`flex h-16 w-16 text-3xl ${
-                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                               userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                             } shadow-2xl rounded-full`}>
                             <img
                                 src={check}
@@ -195,7 +203,7 @@ const VehicleRegistration = () => {
                         </div>{' '}
                         <hr
                             className={`h-1 w-28 ${
-                                finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                                userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                             }`}
                         />
                     </>     
@@ -203,7 +211,7 @@ const VehicleRegistration = () => {
 
                 <div
                     className={`flex h-16 w-16 text-3xl ${
-                        finalUserAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
+                        userAgent?.status === 'true' ? 'bg-cyan-400' : 'bg-gray-400'
                     } shadow-2xl rounded-full`}>
                     <img
                         src={check}
@@ -215,7 +223,7 @@ const VehicleRegistration = () => {
             <div className='flex flex-row items-start text-gray-400 font-thin justify-center text-center text-xl space-x-24 m-5'>
                     <p>Signed Up</p>
                     {
-                        finalUserAgent?.status === 'false'
+                       userAgent?.status === 'false'
                         &&
                         <>
                             <p className="ml-20">
@@ -224,7 +232,7 @@ const VehicleRegistration = () => {
                         </>
                     }
                     {
-                        finalUserAgent?.status === 'true'
+                        userAgent?.status === 'true'
                         &&
                         <>
                             <p>
@@ -472,11 +480,11 @@ const VehicleRegistration = () => {
                         {error?.driverLicense && (
                             <p className='text-red-600 text-sm font-bold'>{error.driverLicense}</p>
                         )}
-                    </div>
-                         {err && (
-                            <p className='text-green-600 text-sm font-bold'>{err}</p>
-                        )}                   
+                    </div>                  
                 </div>
+                {err && (
+                    <p className='text-green-600 text-center text-sm font-bold'>{err}</p>
+                )} 
                 <button onClick={onHandleSubmit} disabled={submitted} className={`h-16 w-full  mt-10 rounded-xl text-white font-extrabold hover:bg-cyan-500 ${submitted ? 'bg-cyan-200' : 'bg-cyan-400' }`}>Submit</button>
             </form>
 							
