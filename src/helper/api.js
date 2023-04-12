@@ -154,3 +154,24 @@ export const getUserVehDoc = async (phoneNo) => {
         console.log(error)
     }
 }
+
+export const deleteVehicleDocument = async (payload) => {
+    try {
+        const response = await fetch(`${baseUrl}/admin/deleteVehicleDoc`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
+        }
+
+        return response;
+    } catch (error) {
+        throw new Error('Failed to delete vehicle document');
+    }
+}

@@ -112,3 +112,49 @@ export const validateVehicleReg = (values) => {
     }
     return errors;
 }
+
+export const validateLicenseReg = (values) => {
+    let errors = {};
+
+    // if (!values.fileName) {
+    //     errors.fileName = "File Name Required"
+    // }
+
+    if (!values.firstName) {
+        errors.firstName = "First Name is Required"
+    }
+
+    if (!values.lastName) {
+        errors.lastName = "Last Name is Required"
+    }
+
+    if (!values.email) {
+        errors.email = "Email is Required"
+    }
+
+    if (!values.homeAddress) {
+        errors.homeAddress = "Home Address is Required"
+    }
+
+    if (!values.city) {
+        errors.city = "City is Required"
+    }
+
+    if (!values.phoneNo) {
+        errors.phoneNo = "Phone Number is Required"
+    }
+
+    if (!values.state) {
+        errors.state = "State is Required"
+    }
+
+    if (!values.vehicleRegNo) {
+        errors.vehicleRegNo = "Vehicle Reg No is Required"
+    }
+
+    if (!values.drivingSchCert) {
+        errors.drivingSchCert = "Driving School Cert Required"
+    }
+
+    return errors;
+}

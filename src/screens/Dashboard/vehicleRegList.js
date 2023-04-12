@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import ConfirmationDialog from "../../components/confirmationDialog";
 import { Link } from "react-router-dom";
-// import add from "./../../assests/plus-lg.svg";
 import {
     getAllVehicleReg, 
-    acceptVehicleDocument
+    acceptVehicleDocument,
+    deleteVehicleDocument
 } from "../../helper/api";
+import deleteItem from './../../assests/delete.svg';
 
 const VehicleRegList = () => {
+    const [deleteProd, setDeleteProd] = useState();
     const [agent, setAgent] = useState([]);
     const getAgents = async () => {
 		const response = await getAllVehicleReg();
@@ -25,6 +28,39 @@ const VehicleRegList = () => {
         console.log(finalRes);
         window.location.reload('/admin/Dashboard/vehicleRegList');
     };
+
+    const deleteFarmerProduct = async (id) => {
+        const res = await deleteVehicleDocument(id);
+        const finalRes = await res.json();
+        setDeleteProd(finalRes);
+    };
+
+	const handleDelete = (id) => {
+		const resMsg = window.confirm("Are you sure you want to delete this product?!");
+		if (resMsg === true) {
+		    deleteFarmerProduct(id);	
+		}
+	}
+
+	if (deleteProd?.message) {
+		window.location.reload('/');
+	}
+    // const handleDelete = (id) => {
+    //     console.log("helo")
+    //         deleteFarmerProduct(id);
+
+    //     // const handleConfirm = () => {
+    //     //     deleteFarmerProduct(id);
+    //     // };
+
+    //     // const handleCancel = () => {
+    //     //     // do nothing
+    //     // };
+
+    //     // const message = "Are you sure you want to delete this product?!";
+    //     // return <ConfirmationDialog message={message} onConfirm={handleConfirm} onCancel={handleCancel} />;
+    // };
+
 
 
     return (
@@ -54,6 +90,7 @@ const VehicleRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">updatedAt</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Accept Document</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Reject Document</th>
+                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Delete</th>
                         </tr>
                     </thead>
                     {
@@ -116,6 +153,9 @@ const VehicleRegList = () => {
                                             className="bg-red-600 rounded-md shadow-md font-bold text-white p-3">
                                             Reject
                                         </button>
+                                    </td>
+                                    <td className="items-center" onClick={() => handleDelete(doc.phoneNo)}>
+                                        <img src={deleteItem} alt={deleteItem} className="ml-5 h-6 w-6" />
                                     </td>
                                 </tr>
                             ))

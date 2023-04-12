@@ -84,10 +84,9 @@ const VehicleRegistration = () => {
                 setTimeout(() => {
                     window.location.reload('/Dashboard')
                 }, 4000);
+            } else {
+                setErr(finalRes.message);
             }
-            // setTimeout(() => {
-            //     window.location.reload('/Dashboard')
-            // }, 3000);
         } catch (error) {
             console.error(error)
         }
@@ -145,7 +144,7 @@ const VehicleRegistration = () => {
     return (
         <>
 			{
-				userAgent.vehicleRegNo
+				userAgent.status === 'true' 
 				&&
 				<div className="flex items-center justify-start pl-12 font-extrabold">
 					<p className="text-xl text-cyan-400 shadow-xl p-2 rounded-lg">
@@ -385,7 +384,7 @@ const VehicleRegistration = () => {
                             <input
                                 type='text'
                                 className='h-16 w-full border-2 rounded-xl p-2'
-                                placeholder='Engine Capicity'
+                                placeholder='Phone Number'
                                 value={phoneNo}
                                 onChange={(e) => setPhoneNo(e.target.value)}
                            />
@@ -483,7 +482,7 @@ const VehicleRegistration = () => {
                     </div>                  
                 </div>
                 {err && (
-                    <p className='text-green-600 text-center text-sm font-bold'>{err}</p>
+                    <p className='text-red-600 mt-7 text-center text-sm font-bold'>{err}</p>
                 )} 
                 <button onClick={onHandleSubmit} disabled={submitted} className={`h-16 w-full  mt-10 rounded-xl text-white font-extrabold hover:bg-cyan-500 ${submitted ? 'bg-cyan-200' : 'bg-cyan-400' }`}>Submit</button>
             </form>
