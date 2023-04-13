@@ -15,12 +15,11 @@ const VehicleRegistration = () => {
     const [vehicleType, setVehicleType] = useState('');
     const [engineCapacity, setEngineCapacity] = useState('');
     const [tankCapacity, setTankCapacity] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
     const [nationalId, setNationalId] = useState('');
     const [nin, setNin] = useState('');
     const [driverLicense, setDriverLicense] = useState('');
     const [error, setError] = useState('');
-    const [submitted, setSubmitted] = useState(false);
+    const [submitted, ] = useState(false);
     const [err, setErr] = useState('');
     const [agent, setAgent] = useState([]);
     const [userAgent, setUserAgent] = useState({});
@@ -54,7 +53,7 @@ const VehicleRegistration = () => {
 		formData.append('engineNumber', engineNumber);
 		formData.append('vehicleType', vehicleType);
 		formData.append('engineCapacity', engineCapacity);
-        formData.append('phoneNo', phoneNo);
+        formData.append('phoneNo', user.phoneNo || '08162725007');
         formData.append('file1', nationalId);
         formData.append('file2', nin);
         formData.append('file3', driverLicense);
@@ -68,7 +67,6 @@ const VehicleRegistration = () => {
             vehicleType,
             engineCapacity,
             tankCapacity,
-            phoneNo,
             nationalId,
             nin,
             driverLicense
@@ -85,7 +83,7 @@ const VehicleRegistration = () => {
                     window.location.reload('/Dashboard')
                 }, 4000);
             } else {
-                setErr(finalRes.message);
+                setErr("Internal Server Error");
             }
         } catch (error) {
             console.error(error)
@@ -378,21 +376,6 @@ const VehicleRegistration = () => {
                         </div>
                     </div>
                     
-                    <div className='flex flex-row items-center justify-between mt-6 font-bold'>
-                        <div className='space-y-3 w-1/2 pr-8'>
-                            <p>Phone Number</p>
-                            <input
-                                type='text'
-                                className='h-16 w-full border-2 rounded-xl p-2'
-                                placeholder='Phone Number'
-                                value={phoneNo}
-                                onChange={(e) => setPhoneNo(e.target.value)}
-                           />
-                        {error?.phoneNo && (
-                            <p className='text-red-600 text-sm font-bold'>{error.phoneNo}</p>
-                        )}
-                        </div>
-                    </div>
                 <p className='text-2xl font-bold mt-7'><span className="text-gray-400">|</span> Owner Information</p>
                 
                 <div className="flex flex-row items-center justify-between">
@@ -484,7 +467,7 @@ const VehicleRegistration = () => {
                 {err && (
                     <p className='text-red-600 mt-7 text-center text-sm font-bold'>{err}</p>
                 )} 
-                <button onClick={onHandleSubmit} disabled={submitted} className={`h-16 w-full  mt-10 rounded-xl text-white font-extrabold hover:bg-cyan-500 ${submitted ? 'bg-cyan-200' : 'bg-cyan-400' }`}>Submit</button>
+                <button onClick={onHandleSubmit} disabled={submitted} className={`h-16 w-full shadow-xl mt-10 rounded-xl text-white font-extrabold hover:bg-cyan-500 ${submitted ? 'bg-cyan-200' : 'bg-cyan-400' }`}>Submit</button>
             </form>
 							
             </div>

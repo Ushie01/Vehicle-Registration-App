@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ConfirmationDialog from "../../components/confirmationDialog";
+// import ConfirmationDialog from "../../components/confirmationDialog";
 import { Link } from "react-router-dom";
 import {
     getAllVehicleReg, 
@@ -9,7 +9,6 @@ import {
 import deleteItem from './../../assests/delete.svg';
 
 const VehicleRegList = () => {
-    const [deleteProd, setDeleteProd] = useState();
     const [agent, setAgent] = useState([]);
     const getAgents = async () => {
 		const response = await getAllVehicleReg();
@@ -29,39 +28,13 @@ const VehicleRegList = () => {
         window.location.reload('/admin/Dashboard/vehicleRegList');
     };
 
-    const deleteFarmerProduct = async (id) => {
-        const res = await deleteVehicleDocument(id);
-        const finalRes = await res.json();
-        setDeleteProd(finalRes);
-    };
-
-	const handleDelete = (id) => {
-		const resMsg = window.confirm("Are you sure you want to delete this product?!");
+	const handleDelete = async (id) => {
+		const resMsg = window.confirm("Are you sure you want to delete this user document?!");
 		if (resMsg === true) {
-		    deleteFarmerProduct(id);	
-		}
+		    await deleteVehicleDocument(id);	
+		    // window.location.reload('/')
+        }
 	}
-
-	if (deleteProd?.message) {
-		window.location.reload('/');
-	}
-    // const handleDelete = (id) => {
-    //     console.log("helo")
-    //         deleteFarmerProduct(id);
-
-    //     // const handleConfirm = () => {
-    //     //     deleteFarmerProduct(id);
-    //     // };
-
-    //     // const handleCancel = () => {
-    //     //     // do nothing
-    //     // };
-
-    //     // const message = "Are you sure you want to delete this product?!";
-    //     // return <ConfirmationDialog message={message} onConfirm={handleConfirm} onCancel={handleCancel} />;
-    // };
-
-
 
     return (
         <>

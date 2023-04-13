@@ -56,28 +56,28 @@ export const getAllLicenseReg = async (payload) => {
     }
 }
 
-export const acceptVehicleDocument = async (payload) => {
+export const acceptVehicleDocument = async ({phoneNo, status}) => {
     try {
-        return await (await fetch(`${baseUrl}/admin/userVehicleApproval`, {
+        return await (await fetch(`${baseUrl}/admin/userVehicleApproval/${phoneNo}/${status}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: null
         }));
     } catch (error) {
         console.log(error)
     }
 }
 
-export const acceptLicenseDocument = async (payload) => {
+export const acceptLicenseDocument = async ({phoneNo, status}) => {
     try {
-        return await (await fetch(`${baseUrl}/admin/userVehicleApproval`, {
+        return await (await fetch(`${baseUrl}/admin/userLicenseApproval/${phoneNo}/${status}`, {
             method: 'PATCH',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: null
         }));
     } catch (error) {
         console.log(error)
@@ -155,23 +155,30 @@ export const getUserVehDoc = async (phoneNo) => {
     }
 }
 
-export const deleteVehicleDocument = async (payload) => {
+ export const deleteLicenseDocument = async (payload) => {
     try {
-        const response = await fetch(`${baseUrl}/admin/deleteVehicleDoc`, {
+        return await (await fetch(`${baseUrl}/admin/deleteLicenseDoc/${payload}`, {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message);
-        }
-
-        return response;
+            body: null
+        }));
     } catch (error) {
-        throw new Error('Failed to delete vehicle document');
+        console.log(error)
+    }
+}
+
+ export const deleteVehicleDocument = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/admin/deleteVehicleDoc/${payload}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: null
+        }));
+    } catch (error) {
+        console.log(error)
     }
 }

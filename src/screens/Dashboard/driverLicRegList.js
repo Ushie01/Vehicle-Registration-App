@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllLicenseReg, acceptLicenseDocument } from '../../helper/api';
+import {
+    getAllLicenseReg, 
+    acceptLicenseDocument,
+    deleteLicenseDocument
+} from '../../helper/api';
+import deleteItem from './../../assests/delete.svg';
+
 
 const DriverLensRegList = () => {
     const [agent, setAgent] = useState([]);
@@ -22,6 +28,13 @@ const DriverLensRegList = () => {
         window.location.reload('/admin/Dashboard/vehicleRegList');
     };
 
+	const handleDelete = async (id) => {
+		const resMsg = window.confirm("Are you sure you want to delete this user document?!");
+		if (resMsg === true) {
+            await deleteLicenseDocument(id);	
+            window.location.reload('/');
+		}
+	}
 
     return (
         <>
@@ -47,6 +60,7 @@ const DriverLensRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">updatedAt</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Accept Document</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Reject Document</th>
+                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Delete</th>
                         </tr>
                     </thead>
                     {
@@ -90,6 +104,9 @@ const DriverLensRegList = () => {
                                             className="bg-red-600 rounded-md shadow-md font-bold text-white p-3">
                                             Reject
                                         </button>
+                                    </td>
+                                    <td className="items-center" onClick={() => handleDelete(doc.phoneNo)}>
+                                        <img src={deleteItem} alt={deleteItem} className="ml-5 h-6 w-6" />
                                     </td>
                                 </tr>
                             ))

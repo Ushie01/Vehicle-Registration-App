@@ -12,15 +12,12 @@ const DriverLensRegistration = () => {
 	const [email, setEmail] = useState('');
 	const [homeAddress, setHomeAddress] = useState('');
 	const [city, setCity] = useState('');
-	// const [phoneNo, setPhoneNo] = useState('');
 	const [state, setState] = useState('');
-	const [vehicleRegNo, setVehicleRegNo] = useState('');
 	const [drivingSchCert, setDrivingSchCert] = useState('');
 	const [error, setError] = useState('');
 	const [err, setErr] = useState('');
 	const [agent, setAgent] = useState([]);
 	const [userAgent, setUserAgent] = useState({});
-	console.log(userAgent);
 
     useEffect(() => {
         const getAgents = async () => {
@@ -37,8 +34,7 @@ const DriverLensRegistration = () => {
             const finalUserAgent = Object.assign({}, ...filteredAgents);
             setUserAgent(finalUserAgent);   
         }
-    }, [agent, user.phoneNo]);
-    
+    }, [agent, user.phoneNo]);    
 
 	const onHandleSubmit = async (e) => {
 		e.preventDefault();
@@ -51,9 +47,7 @@ const DriverLensRegistration = () => {
 		formData.append('city', city);
 		formData.append('phoneNo', user.phoneNo);
 		formData.append('state', state);
-		formData.append('vehicleRegNo', vehicleRegNo);
 		formData.append('file', drivingSchCert);
-		// console.log(drivingSchCert)
 
 		const values = {
 			firstName,
@@ -61,9 +55,7 @@ const DriverLensRegistration = () => {
 			email,
 			homeAddress,
 			city,
-			// phoneNo,
 			state,
-			vehicleRegNo,
 			drivingSchCert
 		}
 
@@ -284,34 +276,6 @@ const DriverLensRegistration = () => {
 						)}
 					</div>
 					<div className='space-y-3 w-1/2 pl-8'>
-						<p>Vehicle Reg No</p>
-						<input
-							type='text'
-							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='Vehicle Reg No'
-							value={vehicleRegNo}
-							onChange={(e) => setVehicleRegNo(e.target.value)}
-						/>
-						{error?.vehicleRegNo && (
-							<p className='text-red-600 text-sm font-bold'>{error.vehicleRegNo}</p>
-						)}
-					</div>
-				</div>
-				<div className='flex flex-row items-center justify-between mt-6 font-bold'>
-					{/* <div className='space-y-3 w-1/2 pr-8'>
-						<p>Mobile Number</p>
-						<input
-							type='text'
-							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='Mobile Number'
-							value={phoneNo}
-							onChange={(e) => setPhoneNo(e.target.value)}
-						/>
-						{error?.phoneNo && (
-							<p className='text-red-600 text-sm font-bold'>{error.phoneNo}</p>
-						)}
-					</div> */}
-					<div className='space-y-3 w-1/2'>
 						<p>State</p>
 						<input
 							type='text'
@@ -324,9 +288,22 @@ const DriverLensRegistration = () => {
 							<p className='text-red-600 text-sm font-bold'>{error.state}</p>
 						)}
 					</div>
+					{/* <div className='space-y-3 w-1/2 pl-8'>
+						<p>Vehicle Reg No</p>
+						<input
+							type='text'
+							className='h-16 w-full border-2 rounded-xl p-2'
+							placeholder='Vehicle Reg No'
+							value={vehicleRegNo}
+							onChange={(e) => setVehicleRegNo(e.target.value)}
+						/>
+						{error?.vehicleRegNo && (
+							<p className='text-red-600 text-sm font-bold'>{error.vehicleRegNo}</p>
+						)}
+					</div> */}
 				</div>
 				<div className='flex flex-row items-center justify-between mt-6 font-bold'>
-					<div className='space-y-3 w-1/2 pl-8'>
+					<div className='space-y-3 w-1/2'>
 						<div className='text-md font-bold space-y-1 mt-5'>
 							<p>Driving School Certificate Number</p>
 							<input
@@ -356,11 +333,15 @@ const DriverLensRegistration = () => {
 							)} */}
 						</div>
 					</div>
+
+				</div>
+				<div className='flex flex-row items-center justify-between mt-6 font-bold'>
+
 				</div>
                 {err && (
                     <p className='text-red-600 mt-7 text-center text-sm font-bold'>{err}</p>
                 )} 
-                <button onClick={onHandleSubmit} className="h-16 w-full bg-cyan-400 mt-10 rounded-xl text-white text-extrabold hover:bg-cyan-500 font-extrabold">Apply</button>
+                <button onClick={onHandleSubmit} className="h-16 shadow-xl w-full bg-cyan-400 mt-10 rounded-xl text-white text-extrabold hover:bg-cyan-500 font-extrabold">Apply</button>
 			</form>
 		</>
 	);
