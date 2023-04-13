@@ -52,7 +52,6 @@ const DriverLensRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">city</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">state</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">phoneNo</th>
-                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">vehicleRegNo</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">drivingSchCert</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">licenseRegNo</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">status</th>
@@ -77,7 +76,6 @@ const DriverLensRegList = () => {
                                     <td className="p-5">{doc.city}</td>
                                     <td className="p-5">{doc.state}</td>
                                     <td className="p-5">{doc.phoneNo}</td>
-                                    <td className="p-5">{doc.vehicleRegNo}</td>
                                     <td className="p-5">
                                         <Link to={`http://localhost:5173/uploads/${doc.drivingSchCert}`}>
                                              <img

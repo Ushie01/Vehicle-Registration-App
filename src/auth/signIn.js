@@ -57,7 +57,7 @@ const Signin = () => {
           <div className="md:p-20 mt-38 md:mt-8 ">
             <div className="mt-32 md:mt-0">
               <h2 className="text-3xl mb-5 font-bold font-sans text-violet-500">
-                Welcome back, Agent Nency
+                Welcome back, Agent 
               </h2>
               <p className="max-w-sm mb-6 font-sans font-light text-violet-500">
                 Welcome back!, pls enter your login details

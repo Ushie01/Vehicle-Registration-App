@@ -18,6 +18,7 @@ const DriverLensRegistration = () => {
 	const [err, setErr] = useState('');
 	const [agent, setAgent] = useState([]);
 	const [userAgent, setUserAgent] = useState({});
+	console.log(drivingSchCert.File);
 
     useEffect(() => {
         const getAgents = async () => {
@@ -61,20 +62,31 @@ const DriverLensRegistration = () => {
 
 		setError(validateLicenseReg(values));
 
-		try {
-			const res = await licenseReg(formData);
-			const finalRes = await res.json();
-			if (finalRes.message.includes('successfully')) {
-				setErr(finalRes.message);
-				setTimeout(() => {
-					window.location.reload('/Dashboard')
-				}, 4000);
-			} else {
-				setErr(finalRes.message)
-			}
-		} catch (error) {
-			console.error(error)
+		if (
+			firstName &&
+			lastName &&
+			email &&
+			homeAddress &&
+			city &&
+			state &&
+			drivingSchCert
+		) {
+			try {
+				const res = await licenseReg(formData);
+				const finalRes = await res.json();
+				if (finalRes.message.includes('successfully')) {
+					setErr(finalRes.message);
+					setTimeout(() => {
+						window.location.reload('/Dashboard')
+					}, 4000);
+				} else {
+					setErr(finalRes.message)
+				}
+			} catch (error) {
+				console.error(error)
+			}			
 		}
+
 	}
 	
 	const handleFileUpload = (event) => {
@@ -288,19 +300,6 @@ const DriverLensRegistration = () => {
 							<p className='text-red-600 text-sm font-bold'>{error.state}</p>
 						)}
 					</div>
-					{/* <div className='space-y-3 w-1/2 pl-8'>
-						<p>Vehicle Reg No</p>
-						<input
-							type='text'
-							className='h-16 w-full border-2 rounded-xl p-2'
-							placeholder='Vehicle Reg No'
-							value={vehicleRegNo}
-							onChange={(e) => setVehicleRegNo(e.target.value)}
-						/>
-						{error?.vehicleRegNo && (
-							<p className='text-red-600 text-sm font-bold'>{error.vehicleRegNo}</p>
-						)}
-					</div> */}
 				</div>
 				<div className='flex flex-row items-center justify-between mt-6 font-bold'>
 					<div className='space-y-3 w-1/2'>
@@ -325,9 +324,9 @@ const DriverLensRegistration = () => {
 							{error?.drivingSchCert && (
 								<p className='text-red-600 text-sm font-bold'>{error.drivingSchCert}</p>
 							)}
-							{/* {drivingSchCert && (
+							{drivingSchCert && (
 								<p className='text-black text-sm font-bold'>{drivingSchCert.name}</p>
-							)} */}
+							)}
 							{/* {error && (
 								<p className='text-red-600 text-sm font-bold'>{error}</p>
 							)} */}

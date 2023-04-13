@@ -32,7 +32,7 @@ const VehicleRegList = () => {
 		const resMsg = window.confirm("Are you sure you want to delete this user document?!");
 		if (resMsg === true) {
 		    await deleteVehicleDocument(id);	
-		    // window.location.reload('/')
+		    window.location.reload('/')
         }
 	}
 
@@ -57,7 +57,6 @@ const VehicleRegList = () => {
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">nationalId</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">nin</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">driverLicense</th>
-                            <th className="p-5 bg-gray-100 border-spacing-2 border border-white">vehicleRegNo</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">Document Approve</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">createdAt</th>
                             <th className="p-5 bg-gray-100 border-spacing-2 border border-white">updatedAt</th>
@@ -109,7 +108,6 @@ const VehicleRegList = () => {
                                              />
                                         </Link>
                                     </td>
-                                    <td className="p-5">{doc.vehicleRegNo}</td>
                                     <td className="p-5">{doc.status}</td>
                                     <td className="p-5">{doc.createdAt}</td>
                                     <td className="p-5">{doc.updatedAt}</td>

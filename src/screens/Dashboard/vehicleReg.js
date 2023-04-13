@@ -40,7 +40,11 @@ const VehicleRegistration = () => {
             setUserAgent(finalUserAgent);   
         }
     }, [agent, user.phoneNo]);
-    
+
+    // if (!user.name) {
+    //     window.location.href = '/Signin';
+    // }
+
 
     const onHandleSubmit = async (e) => {
         e.preventDefault();
@@ -74,19 +78,33 @@ const VehicleRegistration = () => {
 
         setError(validateVehicleReg(values));
 
-        try {
-            const res = await vehicleReg(formData);
-            const finalRes = await res.json();
-            if (finalRes.message.includes('successfully')) {
-                setErr(finalRes.message);
-                setTimeout(() => {
-                    window.location.reload('/Dashboard')
-                }, 4000);
-            } else {
-                setErr("Internal Server Error");
+        if (
+            vehicleCategory &&
+            vehicleMake &&
+            color &&
+            model &&
+            engineNumber &&
+            vehicleType && 
+            engineCapacity &&
+            tankCapacity &&
+            nationalId && 
+            nin && 
+            driverLicense
+        ) {
+            try {
+                const res = await vehicleReg(formData);
+                const finalRes = await res.json();
+                if (finalRes.message.includes('successfully')) {
+                    setErr(finalRes.message);
+                    setTimeout(() => {
+                        window.location.reload('/Dashboard')
+                    }, 4000);
+                } else {
+                    setErr("Internal Server Error");
+                }
+            } catch (error) {
+                console.error(error)
             }
-        } catch (error) {
-            console.error(error)
         }
     }
 
