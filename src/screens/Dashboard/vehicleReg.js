@@ -41,9 +41,9 @@ const VehicleRegistration = () => {
         }
     }, [agent, user.phoneNo]);
 
-    // if (!user.name) {
-    //     window.location.href = '/Signin';
-    // }
+    if (!user.firstName) {
+        window.location.href = '/Signin';
+    }
 
 
     const onHandleSubmit = async (e) => {

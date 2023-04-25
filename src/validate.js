@@ -116,10 +116,6 @@ export const validateVehicleReg = (values) => {
 export const validateLicenseReg = (values) => {
     let errors = {};
 
-    // if (!values.fileName) {
-    //     errors.fileName = "File Name Required"
-    // }
-
     if (!values.firstName) {
         errors.firstName = "First Name is Required"
     }

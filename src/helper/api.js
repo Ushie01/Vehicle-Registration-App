@@ -85,6 +85,7 @@ export const acceptLicenseDocument = async ({phoneNo, status}) => {
 }
 
 export const vehicleReg = async (formData) => {
+    
     try {
         const response = await fetch(`${baseUrl}/user/vehicleRegistration`, {
             method: 'POST',

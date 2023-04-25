@@ -18,7 +18,6 @@ const DriverLensRegistration = () => {
 	const [err, setErr] = useState('');
 	const [agent, setAgent] = useState([]);
 	const [userAgent, setUserAgent] = useState({});
-	console.log(drivingSchCert.File);
 
     useEffect(() => {
         const getAgents = async () => {
