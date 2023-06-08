@@ -82,28 +82,28 @@ const VehicleRegList = () => {
                                     <td className="p-5">{doc.tankCapacity}</td>
                                     <td className="p-5">{doc.phoneNo}</td>
                                     <td className="p-5">
-                                        <Link to={`http://localhost:5173/uploads/${doc.nationalId}`}>
+                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}>
                                              <img
-                                                src={`http://localhost:5173/uploads/${doc.nationalId}`}
-                                                alt={`http://localhost:5173/uploads/${doc.nationalId}`}
+                                                src={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}
+                                                alt={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>
                                     </td>
                                     <td className="p-5">
-                                        <Link to={`http://localhost:5173/uploads/${doc.nin}`}>
+                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.nin}`}>
                                              <img
-                                                src={`http://localhost:5173/uploads/${doc.nin}`}
-                                                alt={`http://localhost:5173/uploads/${doc.nin}`}
+                                                src={`https://vr-api.vercel.app/uploads/${doc.nin}`}
+                                                alt={`https://vr-api.vercel.app/uploads/${doc.nin}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>
                                     </td>
                                     <td className="p-5">
-                                        <Link to={`http://localhost:5173/uploads/${doc.driverLicense}`}>
+                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}>
                                              <img
-                                                src={`http://localhost:5173/uploads/${doc.driverLicense}`}
-                                                alt={`http://localhost:5173/uploads/${doc.driverLicense}`}
+                                                src={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}
+                                                alt={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>
