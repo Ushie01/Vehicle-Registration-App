@@ -82,28 +82,28 @@ const VehicleRegList = () => {
                                     <td className="p-5">{doc.tankCapacity}</td>
                                     <td className="p-5">{doc.phoneNo}</td>
                                     <td className="p-5">
-                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}>
+                                        <Link to={`https://vehicle-registration-app.vercel.app/uploads/${doc.nationalId}`}>
                                              <img
-                                                src={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}
-                                                alt={`https://vr-api.vercel.app/uploads/${doc.nationalId}`}
+                                                src={`https://vehicle-registration-app.vercel.app/uploads/${doc.nationalId}`}
+                                                alt={`https://vehicle-registration-app.vercel.app/uploads/${doc.nationalId}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>
                                     </td>
                                     <td className="p-5">
-                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.nin}`}>
+                                        <Link to={`https://vehicle-registration-app.vercel.app/uploads/${doc.nin}`}>
                                              <img
-                                                src={`https://vr-api.vercel.app/uploads/${doc.nin}`}
-                                                alt={`https://vr-api.vercel.app/uploads/${doc.nin}`}
+                                                src={`https://vehicle-registration-app.vercel.app/uploads/${doc.nin}`}
+                                                alt={`https://vehicle-registration-app.vercel.app/uploads/${doc.nin}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>
                                     </td>
                                     <td className="p-5">
-                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}>
+                                        <Link to={`https://vehicle-registration-app.vercel.app/uploads/${doc.driverLicense}`}>
                                              <img
-                                                src={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}
-                                                alt={`https://vr-api.vercel.app/uploads/${doc.driverLicense}`}
+                                                src={`https://vehicle-registration-app.vercel.app/uploads/${doc.driverLicense}`}
+                                                alt={`https://vehicle-registration-app.vercel.app/uploads/${doc.driverLicense}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>

@@ -77,10 +77,10 @@ const DriverLensRegList = () => {
                                     <td className="p-5">{doc.state}</td>
                                     <td className="p-5">{doc.phoneNo}</td>
                                     <td className="p-5">
-                                        <Link to={`https://vr-api.vercel.app/uploads/${doc.drivingSchCert}`}>
+                                        <Link to={`https://vehicle-registration-app.vercel.app/uploads/${doc.drivingSchCert}`}>
                                              <img
-                                                src={`https://vr-api.vercel.app/uploads/${doc.drivingSchCert}`}
-                                                alt={`https://vr-api.vercel.app/uploads/${doc.drivingSchCert}`}
+                                                src={`https://vehicle-registration-app.vercel.app/uploads/${doc.drivingSchCert}`}
+                                                alt={`https://vehicle-registration-app.vercel.app/uploads/${doc.drivingSchCert}`}
                                                 className="h-20 w-20"
                                              />
                                         </Link>

@@ -1,4 +1,5 @@
 const baseUrl = "https://vr-api.vercel.app/api/v1";
+// const baseUrl = "http://localhost:5173/api/v1"
 
 export const login = async (payload) => {
     try {
